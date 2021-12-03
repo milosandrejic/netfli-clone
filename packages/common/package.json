@@ -1,15 +1,32 @@
 {
-    "name": "common",
-    "version": "1.0.0",
-    "description": "",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git+https://milosandrejic@github.com/milosandrejic/netflix-clone.git"
-    },
-    "author": "Milos Andrejic",
-    "license": "ISC"
+  "name": "common",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "clean": "rm -rf node_modules && rm -rf package-lock.json",
+    "dev": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "author": "Milos Andrejic",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@storybook/addon-actions": "^6.4.5",
+    "@storybook/addon-essentials": "^6.4.5",
+    "@storybook/addon-links": "^6.4.5",
+    "@storybook/builder-webpack5": "^6.4.5",
+    "@storybook/manager-webpack5": "^6.4.5",
+    "@storybook/react": "^6.4.5",
+    "babel-loader": "^8.2.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "concurrently": "^6.4.0",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1",
+    "webpack-node-externals": "^3.0.0"
   }
-  
+}
