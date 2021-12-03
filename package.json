@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "bootstrap": "npx lerna bootstrap --hoist",
+    "dev": "lerna run dev --parallel",
+    "clean": "lerna run clean && rm -rf node_modules && rm -rf package-lock.json"
   },
   "repository": {
     "type": "git",
