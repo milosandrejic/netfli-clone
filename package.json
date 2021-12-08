@@ -5,15 +5,14 @@
   "scripts": {
     "bootstrap": "npx lerna bootstrap --hoist",
     "dev": "lerna run dev --parallel",
+    "storybook": "lerna run storybook --parallel",
     "clean": "lerna run clean && rm -rf node_modules && rm -rf package-lock.json"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://milosandrejic@github.com/milosandrejic/netflix-clone.git"
   },
   "author": "Milos Andrejic",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "babel-loader": "^8.2.3",
     "lerna": "^4.0.0"
   }
 }
