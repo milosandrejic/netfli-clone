@@ -4,3 +4,4 @@ packages/common/dist
 packages/common/package-lock.json
 packages/web/node_modules
 packages/web/pckage-lock.json
+package-lock.json
