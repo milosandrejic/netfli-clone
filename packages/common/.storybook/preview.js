@@ -7,7 +7,7 @@ import {
 } from "./storybookTheme";
 
 export const getAllThemes = () => {
-  return [defaultTheme];
+  return [storybookTheme];
 };
 
 addDecorator(withThemesProvider(getAllThemes(), ThemeProvider));
