@@ -1,5 +1,5 @@
 export const defaultTheme = {
-    font: "Nunito, sans-serif",
+    font: "Martin Sans, sans-serif",
 
     primary: "#E50914",
     primaryText: "#FFFFFF",
