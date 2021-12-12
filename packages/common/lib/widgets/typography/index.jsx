@@ -7,6 +7,7 @@ const Wrapper = styled.div`
     font-size: ${({size}) => size}px;
     line-height: ${({size, lineHeight}) => lineHeight ? lineHeight : size * 1.25}px;
     font-weight: ${({weight}) => weight};
+    max-width: ${({maxWidth}) => maxWidth ? `${maxWidth}px` : "auto"};
     margin: 0;
     padding: 0;
     color: ${({secondary, theme}) => secondary ? theme.gray200 : "inherit"};
@@ -16,20 +17,16 @@ const Wrapper = styled.div`
     text-overflow: inherit;
 `;
 
-export const Typography = ({size, variant, lineHeight, secondary, children}) => {
+export const Typography = ({size, variant, lineHeight, secondary, maxWidth, children}) => {
     let weight = 400;
 
-    if (variant === "extraLight") {
-        weight = 200;
-    } else if (variant === "light") {
+    if (variant === "light") {
         weight = 300;
-    } else if (variant === "semiBold") {
-        weight = 600;
+    } else if (variant === "medium") {
+        weight = 500;
     } else if (variant === "bold") {
         weight = 700;
     }
-
-    console.log(weight)
 
     return (
         <Wrapper
@@ -37,6 +34,7 @@ export const Typography = ({size, variant, lineHeight, secondary, children}) => 
             lineHeight={lineHeight}
             weight={weight}
             secondary={secondary}
+            maxWidth={maxWidth}
         >
             {children}
         </Wrapper>
@@ -53,6 +51,9 @@ Typography.propTypes = {
 
     /** Typography variant */
     variant: PropTypes.oneOf(["extraLight, light, semiBold, bold"]),
+
+    /** If you font to break sentence into multiple rows max width is useful */
+    maxWidth: PropTypes.number
 
 };
 
