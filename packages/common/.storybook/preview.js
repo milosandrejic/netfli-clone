@@ -10,4 +10,4 @@ export const getAllThemes = () => {
   return [storybookTheme];
 };
 
-addDecorator(withThemesProvider(getAllThemes(), ThemeProvider));
+addDecorator(withThemesProvider(getAllThemes(), ThemeProvider))

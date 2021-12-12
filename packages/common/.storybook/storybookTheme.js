@@ -1,6 +1,6 @@
 export const storybookTheme = {
     name: "Default",
-    font: "Nunito, sans-serif",
+    font: "Roboto, sans-serif",
 
     primary: "#E50914",
     primaryText: "#FFFFFF",
