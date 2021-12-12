@@ -5,18 +5,18 @@ import {
 } from "./index";
 
 export default {
-    title: "Typography",
+    title: "Widgets/Typography",
     component: Typography,
     argTypes: {
         variant: {
-          options: ["extraLight", "light", "semiBold", "bold"],
+          options: ["light", "medium", "bold"],
           control: { type: "radio" },
         },
       },
 };
 
 
-export const Variants = (args) =>
+export const Example = (args) =>
     <Typography {...args}>
         This is extra light example text with line height 30
     </Typography>
