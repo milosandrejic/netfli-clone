@@ -4,6 +4,11 @@
         "browser": true,
         "es2021": true
     },
+    "ignorePatterns": [
+        "webpack.config.js",
+        "node_modules",
+        "dist"
+    ],
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
