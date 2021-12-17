@@ -9,7 +9,6 @@ module.exports = (env, argv) => {
         devtool: (isDevelopment ? "source-map" : false),
         entry: {
             "widgets": "./lib/widgets/index.js",
-            "components": "./lib/components/index.js",
             "themes": "./lib/themes/index.js"
         },
         watch: isDevelopment,

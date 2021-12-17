@@ -20,7 +20,9 @@ const Wrapper = styled.div`
 export const Typography = ({size, variant, lineHeight, secondary, maxWidth, children}) => {
     let weight = 400;
 
-    if (variant === "light") {
+    if (variant === "extraLight") {
+        weight = 200;
+    } else if (variant === "light") {
         weight = 300;
     } else if (variant === "medium") {
         weight = 500;
@@ -50,7 +52,7 @@ Typography.propTypes = {
     lineHeight: PropTypes.number,
 
     /** Typography variant */
-    variant: PropTypes.oneOf(["extraLight, light, semiBold, bold"]),
+    variant: PropTypes.oneOf(["extraLight", "light", "semiBold", "bold"]),
 
     /** If you font to break sentence into multiple rows max width is useful */
     maxWidth: PropTypes.number
