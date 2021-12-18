@@ -4,7 +4,8 @@
   "description": "",
   "exports": {
     "./widgets": "./dist/widgets.js",
-    "./themes": "./dist/themes.js"
+    "./themes": "./dist/themes.js",
+    "./components": "./dist/components.js"
   },
   "scripts": {
     "dev": "concurrently \"webpack --mode=development\" \"npx styleguidist server --port 6001 --open\"",
