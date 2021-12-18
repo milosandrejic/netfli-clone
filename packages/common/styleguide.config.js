@@ -15,6 +15,13 @@ module.exports = {
             components: "lib/widgets/**/*.jsx",
             exampleMode: "expand",
             usageMode: "expand"
+        },
+        {
+            name: "Components",
+            content: "lib/components/Readme.md",
+            components: "lib/components/***/*.jsx",
+            exampleMode: "expand",
+            usageMode: "expand"
         }
     ],
     template: {

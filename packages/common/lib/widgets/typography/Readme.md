@@ -7,7 +7,7 @@ Typography example:
 
     <Typography
         size={18}
-        variant="extraLight"
+        varianxt="extraLight"
     >
         Extra extra light text variant
     </Typography>
