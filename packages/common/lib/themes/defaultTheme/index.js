@@ -1,23 +1,19 @@
 export const defaultTheme = {
     font: "Martin Sans, sans-serif",
 
-    primary: "#E50914",
-    primaryText: "#FFFFFF",
-    primaryDark: "#93060d",
+    background: "#141414",
+    foreground: "#FFFFFF",
 
-    background: "#FFFFFF",
-    foreground: "#333333",
+    navbarTransparentBackground: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);",
 
-    dark: "#000000DD",
-    gray000: "#00000099",
-    gray200: "#00000066",
-    gray500: "#00000033",
-    gray600: "#00000024",
-    gray700: "#0000001A",
-    gray800: "#0000000F",
-    white: "#FFFFFF",
+    dark: "#222222",
+    black: "#000000",
+    gray000: "#666666",
+    gray200: "#999999",
+    gray500: "#CCCCCC",
+    gray600: "#DBDBDB",
+    gray700: "#E5E5E5",
+    gray800: "#F0F0F0",
     error: "#D81818",
-    hint: "#A8A064",
-    shadow: "#00000029",
     backdrop: "#0000004D"
 };

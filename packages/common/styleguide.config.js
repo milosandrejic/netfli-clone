@@ -8,6 +8,7 @@ const webpackFn = require("./webpack.config.js");
 const originalWebpackConfig = webpackFn({}, {mode: "development"});
 
 module.exports = {
+    pagePerSection: true,
     sections: [
         {
             name: "Widgets",
