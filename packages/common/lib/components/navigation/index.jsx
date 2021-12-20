@@ -24,8 +24,9 @@ const Wrapper = styled.div`
     width:  100%;
     padding: 0 60px;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
-    background-size: ${({animate}) => animate ? "100% 1000%" : "100% 100%"};
-    transition: all 500ms ease-in-out;
+    background-size: ${({animate}) => animate ? "100% 700%" : "100% 100%"};
+    transition: all 500ms ease;
+    transition-delay: 100ms;
 `;
 
 const NavLeft = styled.div`
