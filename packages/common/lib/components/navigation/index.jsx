@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -7,7 +7,8 @@ import {
 } from "helpers";
 
 import {
-    Typography
+    Typography,
+    Search
 } from "widgets";
 
 import logo from "netflix.svg";
@@ -41,6 +42,7 @@ const Logo = styled.img`
 
 export const Navigation = ({sections, onSelect, selected, sticky}) => {
     const {scrolled} = useScroll(70);
+    const [query, setQuery] = useState("");
 
     return (
         <Wrapper
@@ -61,6 +63,11 @@ export const Navigation = ({sections, onSelect, selected, sticky}) => {
                     )
                 }
             </NavLeft>
+
+            <Search
+                value={query}
+                onChange={setQuery}
+            />
         </Wrapper>
     );
 };
