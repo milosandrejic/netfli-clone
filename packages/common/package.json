@@ -8,7 +8,7 @@
     "./components": "./dist/components.js"
   },
   "scripts": {
-    "dev": "concurrently \"webpack --mode=development\" \"npx styleguidist server --port 6001 --open\"",
+    "dev": "concurrently \"webpack --mode=development\" \"npx styleguidist server --port 6002 --open\"",
     "clean": "rm -rf node_modules && rm -rf package-lock.json",
     "build-storybook": "build-storybook"
   },
