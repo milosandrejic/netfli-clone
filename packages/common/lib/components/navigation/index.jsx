@@ -40,15 +40,12 @@ const Logo = styled.img`
     margin-right: 25px;
 `;
 
-export const Navigation = ({sections, onSelect, selected, sticky}) => {
+export const Navigation = ({sections, onSelect, selected}) => {
     const {scrolled} = useScroll(70);
     const [query, setQuery] = useState("");
 
     return (
-        <Wrapper
-            sticky={sticky}
-            animate={scrolled}
-        >
+        <Wrapper animate={scrolled}>
             <NavLeft>
                 <Logo src={logo} />
                 {

@@ -38,7 +38,6 @@ Navigation, srcoll to see animated background
         sections={sections}
         selected={0}
         onSelect={() => console.log("click")}
-        transitionType={transitionType}
     />
 
 ```
