@@ -6,7 +6,7 @@ ReactDOM.render(
     document.getElementById("root")
 );
 
-if ("service-worker" in navigatior) {
+if ("service-worker" in navigator) {
     window.addEventListener("load", () => {
         navigator.serviceWorker.register("/service-worker.js")
     });

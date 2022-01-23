@@ -11,15 +11,9 @@
   "author": "Milos Andrejic",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/eslint-parser": "^7.16.3",
-    "@babel/preset-react": "^7.16.0",
-    "babel-loader": "^8.2.3",
     "eslint": "^8.4.1",
     "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-react": "^7.27.1",
-    "lerna": "^4.0.0",
-    "terser-webpack-plugin": "^5.3.0",
-    "workbox-webpack-plugin": "^6.4.2"
+    "lerna": "^4.0.0"
   }
 }

@@ -15,7 +15,7 @@ module.exports = (env, argv) => {
         output: {
             path: path.resolve(__dirname, "dist"),
             filename: isProduction ? "static/[name].[contenthash].js" : "static/[name].js",
-            publicPath: "/"
+            publicPath: "/",
         },
         module: {
             rules: [
@@ -55,7 +55,8 @@ module.exports = (env, argv) => {
             new WorkboxPlugin.GenerateSW({
                 swDest: "service-worker.js",
                 clientsClaim: true,
-                skipWaiting: true
+                skipWaiting: true,
+                maximumFileSizeToCacheInBytes: 5000000
             })
         ],
         optimization: {
