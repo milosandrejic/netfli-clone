@@ -2,7 +2,7 @@ const nodeExternals = require("webpack-node-externals");
 const path = require("path");
 
 module.exports = (env, argv) => {
-    const isDevelopment = argv?.mode === "development";
+    const isDevelopment = argv.mode === "development";
 
     return {
         target: "web",
