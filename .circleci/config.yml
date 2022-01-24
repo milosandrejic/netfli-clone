@@ -1,0 +1,74 @@
+version: 2.1
+executors:
+  app-executor:
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/repo
+aliases:
+  - &show-current-branch-name
+    run:
+      name: Show current branch name
+      command: echo ${CIRCLE_BRANCH}
+  - &restore-cache
+    restore_cache:
+      keys:
+        - app-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
+        - app-
+  - &save-cache
+    save_cache:
+      key: app-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
+      paths:
+        - ./node_modules
+        - ./.next/cache
+  - &install-dependencies
+    run:
+      name: Install dependencies
+      command: |
+        mkdir -p artifacts
+        npm run bootstrap
+  - &build-project
+    run:
+      name: Build project
+      command: |
+        npm run bootstrap
+        npm run build 
+        echo "Build completed"
+  - &deploy-to-heroku
+    run:
+      name: Deploy code to heroku
+      command: |
+        if [ "${CIRCLE_BRANCH}" == "dev" ]
+        then
+          git push https://heroku:${HEROKU_API_KEY}@git.heroku.com/fake-netflix-dev.git ${CIRCLE_BRANCH}:master -f
+        elif [ "${CIRCLE_BRANCH}" == "prod"  ]
+        then
+          git push https://heroku:${HEROKU_API_KEY}@git.heroku.com/fake-netflix.git ${CIRCLE_BRANCH}:master -f
+        fi
+  
+jobs:
+  build:
+    executor: app-executor
+    steps:
+      - checkout
+      - *show-current-branch-name
+      - *restore-cache
+      - *install-dependencies
+      - *save-cache
+      - *build-project
+  deploy-to-heroku:
+    executor: app-executor
+    steps:
+        - checkout
+        - *show-current-branch-name
+        - *restore-cache
+        - *deploy-to-heroku        
+
+workflows:
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy-to-heroku:
+          filters:
+            branches:
+              only:
+                - dev
