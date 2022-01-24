@@ -2,7 +2,7 @@
     "name": "web",
     "version": "1.0.0",
     "scripts": {
-        "build": "webpack --mode=production",
+        "build": "npx webpack --mode=production",
         "dev": "webpack serve --mode=development --open",
         "clean": "rm -rf dist && rm -rf node_modules && rm -rf package-lock.json"
     },
