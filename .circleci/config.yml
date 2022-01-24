@@ -68,6 +68,8 @@ workflows:
     jobs:
       - build
       - deploy-to-heroku:
+          requires:
+            - build
           filters:
             branches:
               only:
