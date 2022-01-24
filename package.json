@@ -2,6 +2,9 @@
   "name": "netflix-clone",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "bootstrap": "npx lerna bootstrap --hoist",
     "dev": "lerna run dev --parallel",
