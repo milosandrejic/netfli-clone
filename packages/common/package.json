@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "concurrently \"webpack --mode=development\" \"npx styleguidist server --port 6002 --open\"",
-    "build": "webpack --mode=production",
+    "build": "npx webpack --mode=production",
     "clean": "rm -rf node_modules && rm -rf package-lock.json"
   },
   "dependencies": {
@@ -17,9 +17,7 @@
     "react-dom": "^17.0.2",
     "react-inlinesvg": "^2.3.0",
     "styled-components": "^5.3.3",
-    "react-styleguidist": "^11.1.7",
-    "webpack": "^5.66.4",
-    "webpack-cli": "^4.9.1"
+    "react-styleguidist": "^11.1.7"
   },
   "author": "Milos Andrejic",
   "license": "ISC",
@@ -31,6 +29,8 @@
     "babel-plugin-styled-components": "^2.0.2",
     "concurrently": "^6.4.0",
     "url-loader": "^4.1.1",
+    "webpack": "^5.66.4",
+    "webpack-cli": "^4.9.1",
     "webpack-node-externals": "^3.0.0",
     "process": "^0.11.10"
   }
