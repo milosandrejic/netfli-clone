@@ -1,4 +1,0 @@
-[build]
-base = "/"
-publish = "/packages/web/dist"
-command = "npm run bootstrap && npm run build
