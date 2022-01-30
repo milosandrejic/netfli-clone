@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "concurrently \"webpack --mode=development\" \"npx styleguidist server --port 6002 --open\"",
-    "build": "npx webpack --mode=production",
+    "build": "webpack --mode=production",
     "clean": "rm -rf node_modules && rm -rf package-lock.json"
   },
   "dependencies": {
