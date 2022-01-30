@@ -2,8 +2,3 @@
 base = "/"
 publish = "/packages/web/dist"
 command = "npm run bootstrap && npm run build"
-
-[context.branch-deploy]
-  command = "echo branch"
-[context.branch-deploy.environment]
-  NODE_ENV = "development"
