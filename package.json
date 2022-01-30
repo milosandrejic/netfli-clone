@@ -9,7 +9,6 @@
     "bootstrap": "npx lerna bootstrap --hoist",
     "dev": "lerna run dev --parallel",
     "build": "npx lerna run build --scope common --scope web",
-    "build-web": "npx lerna run build --scope common --scope web",
     "storybook": "lerna run storybook --parallel",
     "clean": "lerna run clean && rm -rf node_modules && rm -rf package-lock.json"
   },
