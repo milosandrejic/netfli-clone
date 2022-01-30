@@ -1,0 +1,9 @@
+[build]
+base = "/"
+publish = "/packages/web/dist"
+command = "lerna run bootstrap && lerna run build"
+
+[context.branch-deploy]
+  command = "echo branch"
+[context.branch-deploy.environment]
+  NODE_ENV = "development"
