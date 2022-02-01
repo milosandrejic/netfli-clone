@@ -1,8 +1,37 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import {
+    Typography
+} from "common/widgets";
+
+const sections = [
+    {
+        title: "Home",
+        route: "/"
+    },
+    {
+        title: "TV Shows",
+        route: "/tv-shows"
+    },
+    {
+        title: "Movies",
+        route: "/movies"
+    },
+    {
+        title: "New & Popular",
+        route: "/new&popular"
+    },
+    {
+        title: "My List",
+        route: "/favorites"
+    }
+];
+
 ReactDOM.render(
-    <div>web</div>,
+    <>
+        <Typography>H1</Typography>
+    </>,
     document.getElementById("root")
 );
 

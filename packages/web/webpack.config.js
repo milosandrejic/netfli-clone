@@ -17,6 +17,7 @@ module.exports = (env, argv) => {
             filename: isProduction ? "static/[name].[contenthash].js" : "static/[name].js",
             publicPath: "/",
         },
+        target: "web",
         module: {
             rules: [
                 {
@@ -28,7 +29,6 @@ module.exports = (env, argv) => {
                             cacheDirectory: true,
                             presets: ["@babel/preset-env", "@babel/preset-react"],
                             plugins: [
-                                "@babel/plugin-transform-runtime",
                                 "babel-plugin-styled-components"
                             ]
                         }
@@ -68,7 +68,7 @@ module.exports = (env, argv) => {
             ],
             splitChunks: {
                 chunks: "all",
-                minSize: 0,
+                minSize: 10000,
                 maxInitialRequests: 20,
                 maxAsyncRequests: 20,
                 cacheGroups: {
