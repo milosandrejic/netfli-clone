@@ -7,7 +7,7 @@ const Wrapper = styled.div`
     font-size: ${({size}) => size}px;
     line-height: ${({size, lineHeight}) => lineHeight ? lineHeight : size * 1.25}px;
     font-weight: ${({weight}) => weight};
-    max-width: ${({maxWidth}) => maxWidth ? `${maxWidth}px` : "auto"};
+    max-width: ${({maxWidth}) => maxWidth ? `${maxWidth}px` : "none"};
     margin: 0;
     padding: 0;
     color: ${({secondary, theme}) => secondary ? theme.gray200 : "inherit"};

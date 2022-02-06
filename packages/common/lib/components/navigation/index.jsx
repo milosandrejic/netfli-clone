@@ -7,7 +7,6 @@ import {
 } from "helpers";
 
 import {
-    Typography,
     Search
 } from "widgets";
 
@@ -28,6 +27,7 @@ const Wrapper = styled.div`
     background-size: ${({animate}) => animate ? "100% 700%" : "100% 100%"};
     transition: all 500ms ease;
     transition-delay: 100ms;
+    letter-spacing: 0.8px;
 `;
 
 const NavLeft = styled.div`
@@ -48,6 +48,7 @@ export const Navigation = ({sections, onSelect, selected}) => {
         <Wrapper animate={scrolled}>
             <NavLeft>
                 <Logo src={logo} />
+
                 {
                     sections.map((section, index) =>
                         <NavItem
@@ -88,11 +89,25 @@ Navigation.defaultProps = {
     sticky: false
 };
 
-const NavItemWrapper = styled.div`
+const NavItemWrapper = styled.p`
+    position: relative;
+    font-family: ${({theme}) => theme.font};
+    font-size: 13px;
+    font-weight: ${({selected}) => selected ? 600 : 300};
     color: ${({selected, theme}) => selected ? theme.foreground : theme.gray700};
     cursor: pointer;
     user-select: none;
     margin-left: 20px;
+    transition: color .4s;
+
+    &::after {
+        display: block;
+        content: attr(title);
+        font-weight: bold;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+    }
 
     &:hover {
         color: ${({theme}) => theme.gray500};
@@ -101,8 +116,9 @@ const NavItemWrapper = styled.div`
 
 const NavItem = ({title, onSelect, selected, index}) =>
     <NavItemWrapper
-        onClick={() => onSelect(index)}
+        title={title}
         selected={selected}
+        onClick={() => onSelect(index)}
     >
-        <Typography size={14}>{title}</Typography>
+        {title}
     </NavItemWrapper>;
