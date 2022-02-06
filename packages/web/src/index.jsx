@@ -1,42 +1,42 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {createGlobalStyle, ThemeProvider} from "styled-components";
 
 import {
-    Typography
-} from "common/widgets";
+    BrowserRouter as Router
+} from "react-router-dom";
 
-const sections = [
-    {
-        title: "Home",
-        route: "/"
-    },
-    {
-        title: "TV Shows",
-        route: "/tv-shows"
-    },
-    {
-        title: "Movies",
-        route: "/movies"
-    },
-    {
-        title: "New & Popular",
-        route: "/new&popular"
-    },
-    {
-        title: "My List",
-        route: "/favorites"
+import Navigation from "common/navigation";
+
+import {
+    defaultTheme
+} from "common/themes";
+
+const GlobalStyle = createGlobalStyle`
+    * {
+        font-family: ${({theme}) => theme.font};
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
-];
+
+    body {
+        background-color: ${({theme}) => theme.background};
+    }
+`;
 
 ReactDOM.render(
-    <>
-        <Typography>H1</Typography>
-    </>,
+    <Router>
+        <ThemeProvider theme={defaultTheme}>
+            <GlobalStyle />
+            <Navigation />
+        </ThemeProvider>
+    </Router>,
     document.getElementById("root")
 );
 
 if ("service-worker" in navigator) {
     window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/service-worker.js")
+        navigator.serviceWorker.register("/service-worker.js");
     });
 }
