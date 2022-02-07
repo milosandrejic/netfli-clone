@@ -41,7 +41,7 @@ export default () => {
         <Navigation
             sections={sections}
             selected={selectedIndex}
-            onSelect={setSelectedIndex}
+            onChange={setSelectedIndex}
         />
     );
 };

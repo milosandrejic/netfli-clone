@@ -13,10 +13,8 @@ import {
 import logo from "netflix.svg";
 
 const Wrapper = styled.div`
-    ${({sticky}) => sticky && `
-        position: sticky;
-        top: 0;
-    `}
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -38,23 +36,28 @@ const NavLeft = styled.div`
 const Logo = styled.img`
     width: 92px;
     margin-right: 25px;
+    cursor: pointer;
+    user-select: none;
 `;
 
-export const Navigation = ({sections, onSelect, selected}) => {
+export const Navigation = ({sections, onChange, selected}) => {
     const {scrolled} = useScroll(70);
     const [query, setQuery] = useState("");
 
     return (
         <Wrapper animate={scrolled}>
             <NavLeft>
-                <Logo src={logo} />
+                <Logo
+                    src={logo}
+                    onClick={() => onChange(0)}
+                />
 
                 {
                     sections.map((section, index) =>
                         <NavItem
                             key={section.title}
                             title={section.title}
-                            onSelect={onSelect}
+                            onChange={onChange}
                             selected={selected === index}
                             index={index}
                         />
@@ -76,7 +79,7 @@ Navigation.propTypes = {
     sections: PropTypes.arrayOf(PropTypes.object).isRequired,
 
     /** Function which will be triggered when user clicks on one of navigation items */
-    onSelect: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
 
     /** Index of selected item which will be higlighted */
     selected: PropTypes.number.isRequired,
@@ -114,11 +117,11 @@ const NavItemWrapper = styled.p`
     }
 `;
 
-const NavItem = ({title, onSelect, selected, index}) =>
+const NavItem = ({title, onChange, selected, index}) =>
     <NavItemWrapper
         title={title}
         selected={selected}
-        onClick={() => onSelect(index)}
+        onClick={() => onChange(index)}
     >
         {title}
     </NavItemWrapper>;

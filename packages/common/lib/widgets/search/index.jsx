@@ -13,9 +13,9 @@ const Wrapper = styled.div`
 `;
 
 const Input = styled.input`
-    width: ${({expand}) => expand ? "180px" : 0};
+    width: ${({expand}) => expand ? "270px" : 0};
     font-family: ${({theme}) => theme.font};
-    font-size: 16px;
+    font-size: 14px;
     transition: all 300ms;
     background-color: transparent;
     z-index: 990;
@@ -58,7 +58,10 @@ export const Search = ({value, onChange}) => {
                 onChange={e => onSearch(e.target.value)}
                 expand={expand}
                 tabIndex={1}
-                onBlur={() => setExpand(false)}
+                onBlur={() => {
+                    onSearch("");
+                    setExpand(false);
+                }}
             />
         </Wrapper>
     );
