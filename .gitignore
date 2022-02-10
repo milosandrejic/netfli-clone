@@ -3,3 +3,4 @@ packages/common/node_modules
 packages/common/dist
 packages/web/node_modules
 packages/web/dist
+.env
