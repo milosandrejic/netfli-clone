@@ -1,5 +1,10 @@
 import React, {useState, useEffect} from "react";
-import {useHistory} from "react-router-dom";
+import {
+    useHistory,
+    useLocation
+} from "react-router-dom";
+
+import api from "api";
 
 import {
     Navigation
@@ -30,18 +35,32 @@ const sections = [
 
 export default () => {
     const history = useHistory();
+    const location = useLocation();
 
     const [selectedIndex, setSelectedIndex] = useState(0);
 
     useEffect(() => {
-        history.push(sections[selectedIndex].route);
-    }, [selectedIndex]);
+        const index = sections.findIndex(s => s.route === location.pathname);
+
+        setSelectedIndex(index);
+    }, [location.pathname]);
+
+    useEffect(async () => {
+        const response = await api.get("/movie/popular");
+
+        console.log(response.data);
+    }, []);
+
+    const onNavItemSelect = (index) => {
+        setSelectedIndex(index);
+        history.push(sections[index].route);
+    };
 
     return (
         <Navigation
             sections={sections}
             selected={selectedIndex}
-            onChange={setSelectedIndex}
+            onChange={onNavItemSelect}
         />
     );
 };
