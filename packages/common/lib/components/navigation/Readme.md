@@ -24,20 +24,12 @@ Navigation, srcoll to see animated background
         }
     ];
 
-   const [transitionType, setTransitionType] = React.useState("natural");
-
-    setInterval(() => {
-        if (transitionType === "natural") {
-            setTransitionType("backwards");
-        } else {
-            setTransitionType("natural");
-        }
-    }, 2000);
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
 
     <Navigation
         sections={sections}
-        selected={0}
-        onSelect={() => console.log("click")}
+        selected={selectedIndex}
+        onChange={setSelectedIndex}
     />
 
 ```

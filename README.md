@@ -1,1 +1,1 @@
-# netflix-clone [![Netlify Status](https://api.netlify.com/api/v1/badges/95e91c3e-5a6e-4a2c-8037-726ab56b5438/deploy-status)](https://app.netlify.com/sites/fnetflix/deploys)
+# netflix-clone. [![Netlify Status](https://api.netlify.com/api/v1/badges/3af29bea-9427-41b4-98d2-c3677999b293/deploy-status)](https://app.netlify.com/sites/fnetflix-dev/deploys)

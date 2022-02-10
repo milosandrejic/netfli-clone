@@ -7,27 +7,25 @@ import {
 } from "helpers";
 
 import {
-    Typography,
     Search
 } from "widgets";
 
 import logo from "netflix.svg";
 
 const Wrapper = styled.div`
-    ${({sticky}) => sticky && `
-        position: sticky;
-        top: 0;
-    `}
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 68px;
     width:  100%;
     padding: 0 60px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(to bottom, rgb(20, 20, 20) 0%, rgb(20, 20, 20) 10%, transparent 100%);
     background-size: ${({animate}) => animate ? "100% 700%" : "100% 100%"};
-    transition: all 500ms ease;
+    transition: all 400ms;
     transition-delay: 100ms;
+    letter-spacing: 0.8px;
 `;
 
 const NavLeft = styled.div`
@@ -38,22 +36,28 @@ const NavLeft = styled.div`
 const Logo = styled.img`
     width: 92px;
     margin-right: 25px;
+    cursor: pointer;
+    user-select: none;
 `;
 
-export const Navigation = ({sections, onSelect, selected}) => {
-    const {scrolled} = useScroll(70);
+export const Navigation = ({sections, onChange, selected}) => {
+    const {scrolled} = useScroll(10);
     const [query, setQuery] = useState("");
 
     return (
         <Wrapper animate={scrolled}>
             <NavLeft>
-                <Logo src={logo} />
+                <Logo
+                    src={logo}
+                    onClick={() => onChange(0)}
+                />
+
                 {
                     sections.map((section, index) =>
                         <NavItem
                             key={section.title}
                             title={section.title}
-                            onSelect={onSelect}
+                            onChange={onChange}
                             selected={selected === index}
                             index={index}
                         />
@@ -75,7 +79,7 @@ Navigation.propTypes = {
     sections: PropTypes.arrayOf(PropTypes.object).isRequired,
 
     /** Function which will be triggered when user clicks on one of navigation items */
-    onSelect: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
 
     /** Index of selected item which will be higlighted */
     selected: PropTypes.number.isRequired,
@@ -88,21 +92,36 @@ Navigation.defaultProps = {
     sticky: false
 };
 
-const NavItemWrapper = styled.div`
+const NavItemWrapper = styled.p`
+    position: relative;
+    font-family: ${({theme}) => theme.font};
+    font-size: 13px;
+    font-weight: ${({selected}) => selected ? 600 : 300};
     color: ${({selected, theme}) => selected ? theme.foreground : theme.gray700};
     cursor: pointer;
     user-select: none;
     margin-left: 20px;
+    transition: color .4s;
+
+    &::after {
+        display: block;
+        content: attr(title);
+        font-weight: bold;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+    }
 
     &:hover {
         color: ${({theme}) => theme.gray500};
     }
 `;
 
-const NavItem = ({title, onSelect, selected, index}) =>
+const NavItem = ({title, onChange, selected, index}) =>
     <NavItemWrapper
-        onClick={() => onSelect(index)}
+        title={title}
         selected={selected}
+        onClick={() => onChange(index)}
     >
-        <Typography size={14}>{title}</Typography>
+        {title}
     </NavItemWrapper>;

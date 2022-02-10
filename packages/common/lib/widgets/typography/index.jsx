@@ -6,8 +6,9 @@ const Wrapper = styled.div`
     font-family: ${({theme}) => theme.font};
     font-size: ${({size}) => size}px;
     line-height: ${({size, lineHeight}) => lineHeight ? lineHeight : size * 1.25}px;
+    letter-spacing: ${({letterSpacing}) => letterSpacing ? `${letterSpacing}px` : "initial"};
     font-weight: ${({weight}) => weight};
-    max-width: ${({maxWidth}) => maxWidth ? `${maxWidth}px` : "auto"};
+    max-width: ${({maxWidth}) => maxWidth ? `${maxWidth}px` : "none"};
     margin: 0;
     padding: 0;
     color: ${({secondary, theme}) => secondary ? theme.gray200 : "inherit"};
@@ -17,7 +18,7 @@ const Wrapper = styled.div`
     text-overflow: inherit;
 `;
 
-export const Typography = ({size, variant, lineHeight, secondary, maxWidth, children}) => {
+export const Typography = ({size, variant, lineHeight, letterSpacing, secondary, maxWidth, children}) => {
     let weight = 400;
 
     if (variant === "extraLight") {
@@ -37,6 +38,7 @@ export const Typography = ({size, variant, lineHeight, secondary, maxWidth, chil
             weight={weight}
             secondary={secondary}
             maxWidth={maxWidth}
+            letterSpacing={letterSpacing}
         >
             {children}
         </Wrapper>

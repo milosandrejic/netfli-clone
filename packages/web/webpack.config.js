@@ -2,6 +2,10 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
+const webpack = require('webpack')
+const dotenv = require('dotenv')
+
+dotenv.config();
 
 module.exports = (env, argv) => {
     const isProduction = argv.mode === "production";
@@ -17,6 +21,7 @@ module.exports = (env, argv) => {
             filename: isProduction ? "static/[name].[contenthash].js" : "static/[name].js",
             publicPath: "/",
         },
+        target: "web",
         module: {
             rules: [
                 {
@@ -28,7 +33,6 @@ module.exports = (env, argv) => {
                             cacheDirectory: true,
                             presets: ["@babel/preset-env", "@babel/preset-react"],
                             plugins: [
-                                "@babel/plugin-transform-runtime",
                                 "babel-plugin-styled-components"
                             ]
                         }
@@ -57,7 +61,10 @@ module.exports = (env, argv) => {
                 clientsClaim: true,
                 skipWaiting: true,
                 maximumFileSizeToCacheInBytes: 5000000
-            })
+            }),
+            new webpack.DefinePlugin({
+                'process.env': JSON.stringify(process.env)
+             })
         ],
         optimization: {
             minimize: isProduction,
@@ -68,7 +75,7 @@ module.exports = (env, argv) => {
             ],
             splitChunks: {
                 chunks: "all",
-                minSize: 0,
+                minSize: 10000,
                 maxInitialRequests: 20,
                 maxAsyncRequests: 20,
                 cacheGroups: {
