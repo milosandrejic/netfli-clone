@@ -4,8 +4,6 @@ export const defaultTheme = {
     background: "#141414",
     foreground: "#FFFFFF",
 
-    navbarTransparentBackground: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);",
-
     dark: "#222222",
     black: "#000000",
     gray000: "#666666",
