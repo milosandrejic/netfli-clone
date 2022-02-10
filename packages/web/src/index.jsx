@@ -5,10 +5,13 @@ import ReactDOM from "react-dom";
 import {createGlobalStyle, ThemeProvider} from "styled-components";
 
 import {
-    BrowserRouter as Router
+    BrowserRouter as Router,
+    Switch,
+    Route
 } from "react-router-dom";
 
 import Navigation from "common/navigation";
+import Home from "pages/home";
 
 import {
     defaultTheme
@@ -32,6 +35,9 @@ ReactDOM.render(
         <ThemeProvider theme={defaultTheme}>
             <GlobalStyle />
             <Navigation />
+            <Switch>
+                <Route exact path="/" component={Home} />
+            </Switch>
         </ThemeProvider>
     </Router>,
     document.getElementById("root")

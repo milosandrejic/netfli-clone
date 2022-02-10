@@ -21,9 +21,9 @@ const Wrapper = styled.div`
     height: 68px;
     width:  100%;
     padding: 0 60px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(to bottom, rgb(20, 20, 20) 0%, rgb(20, 20, 20) 10%, transparent 100%);
     background-size: ${({animate}) => animate ? "100% 700%" : "100% 100%"};
-    transition: all 500ms ease;
+    transition: all 400ms;
     transition-delay: 100ms;
     letter-spacing: 0.8px;
 `;
@@ -41,7 +41,7 @@ const Logo = styled.img`
 `;
 
 export const Navigation = ({sections, onChange, selected}) => {
-    const {scrolled} = useScroll(70);
+    const {scrolled} = useScroll(10);
     const [query, setQuery] = useState("");
 
     return (

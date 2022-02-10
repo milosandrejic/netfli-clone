@@ -14,8 +14,9 @@ const Wrapper = styled.div`
     height: 100vh;
     background: ${({theme, url}) => `
         linear-gradient(
-            transparent 0%,
-            transparent 70%,
+            rgba(20, 20, 20, 0.3) 0%,
+            rgba(20, 20, 20, 0.3) 50%,
+            rgba(20, 20, 20, 0.9) 90%,
             ${theme.background} 95%,
             ${theme.background} 100%
         ),
@@ -26,6 +27,7 @@ const Wrapper = styled.div`
 
 const MovieInfo = styled.div`
     margin-top: -50px;
+    max-width: 600px;
     color: ${({theme}) => theme.foreground};
 `;
 
@@ -34,16 +36,17 @@ export const Billboard = ({movie, onMoreInfo}) =>
         <MovieInfo>
             <Typography
                 variant="bold"
-                size={32}
+                size={50}
             >
                 {movie?.title}
             </Typography>
 
-            <Spacer size={20} />
+            <Spacer size={30} />
 
             <Typography
-                size={24}
-                variant="semiBold"
+                size={16}
+                lineHeight={30}
+                letterSpacing={1}
             >
                 {movie?.description}
             </Typography>
