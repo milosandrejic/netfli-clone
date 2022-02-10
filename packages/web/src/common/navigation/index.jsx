@@ -4,8 +4,6 @@ import {
     useLocation
 } from "react-router-dom";
 
-import api from "api";
-
 import {
     Navigation
 } from "common/components";
@@ -44,12 +42,6 @@ export default () => {
 
         setSelectedIndex(index);
     }, [location.pathname]);
-
-    useEffect(async () => {
-        const response = await api.get("/movie/popular");
-
-        console.log(response.data);
-    }, []);
 
     const onNavItemSelect = (index) => {
         setSelectedIndex(index);
