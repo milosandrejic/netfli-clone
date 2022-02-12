@@ -21,8 +21,13 @@ const Wrapper = styled.div`
     height: 68px;
     width:  100%;
     padding: 0 60px;
-    background: linear-gradient(to bottom, rgb(20, 20, 20) 0%, rgb(20, 20, 20) 10%, transparent 100%);
-    background-size: ${({animate}) => animate ? "100% 700%" : "100% 100%"};
+    background: linear-gradient(
+        to bottom,
+        rgb(20, 20, 20) 0%,
+        rgb(20, 20, 20) 10%, 
+        transparent 100%
+    );
+    background-size: ${({scrolled}) => scrolled ? "100% 700%" : "100% 100%"};
     transition: all 400ms;
     transition-delay: 100ms;
     letter-spacing: 0.8px;
@@ -40,12 +45,12 @@ const Logo = styled.img`
     user-select: none;
 `;
 
-export const Navigation = ({sections, onChange, selected}) => {
+export const Navigation = ({items, onChange, selected}) => {
     const {scrolled} = useScroll(10);
     const [query, setQuery] = useState("");
 
     return (
-        <Wrapper animate={scrolled}>
+        <Wrapper scrolled={scrolled}>
             <NavLeft>
                 <Logo
                     src={logo}
@@ -53,10 +58,10 @@ export const Navigation = ({sections, onChange, selected}) => {
                 />
 
                 {
-                    sections.map((section, index) =>
+                    items.map((item, index) =>
                         <NavItem
-                            key={section.title}
-                            title={section.title}
+                            key={item.title}
+                            title={item.title}
                             onChange={onChange}
                             selected={selected === index}
                             index={index}
@@ -75,21 +80,14 @@ export const Navigation = ({sections, onChange, selected}) => {
 
 Navigation.propTypes = {
 
-    /** Array of sections which will be rendered as navigation items */
-    sections: PropTypes.arrayOf(PropTypes.object).isRequired,
+    /** Array of navigation items which will be rendered as navigation items */
+    items: PropTypes.arrayOf(PropTypes.object).isRequired,
 
     /** Function which will be triggered when user clicks on one of navigation items */
     onChange: PropTypes.func.isRequired,
 
     /** Index of selected item which will be higlighted */
-    selected: PropTypes.number.isRequired,
-
-    /** If true navigation will be position: sticky; top: 0; */
-    sticky: PropTypes.bool
-};
-
-Navigation.defaultProps = {
-    sticky: false
+    selected: PropTypes.number.isRequired
 };
 
 const NavItemWrapper = styled.p`

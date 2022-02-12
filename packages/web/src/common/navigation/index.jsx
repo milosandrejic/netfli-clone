@@ -8,7 +8,7 @@ import {
     Navigation
 } from "common/components";
 
-const sections = [
+const navItems = [
     {
         title: "Home",
         route: "/"
@@ -38,19 +38,19 @@ export default () => {
     const [selectedIndex, setSelectedIndex] = useState(0);
 
     useEffect(() => {
-        const index = sections.findIndex(s => s.route === location.pathname);
+        const index = navItems.findIndex(s => s.route === location.pathname);
 
         setSelectedIndex(index);
     }, [location.pathname]);
 
     const onNavItemSelect = (index) => {
         setSelectedIndex(index);
-        history.push(sections[index].route);
+        history.push(navItems[index].route);
     };
 
     return (
         <Navigation
-            sections={sections}
+            items={navItems}
             selected={selectedIndex}
             onChange={onNavItemSelect}
         />

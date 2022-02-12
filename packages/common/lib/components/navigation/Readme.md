@@ -1,7 +1,7 @@
 Navigation, srcoll to see animated background
 
 ```jsx
-    const sections = [
+    const navItems = [
         {
             title: "Home",
             route: "/"
@@ -27,7 +27,7 @@ Navigation, srcoll to see animated background
     const [selectedIndex, setSelectedIndex] = React.useState(0);
 
     <Navigation
-        sections={sections}
+        items={navItems}
         selected={selectedIndex}
         onChange={setSelectedIndex}
     />
