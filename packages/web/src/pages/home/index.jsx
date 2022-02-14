@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 
 import {
@@ -9,16 +9,24 @@ import {
     Spacer
 } from "common/widgets";
 
+import generateRandomMovie from "utils/billboardUtils";
+
 const Wrapper = styled.div`
     margin-top: -68px;
 `;
 
 export default () => {
-    const [movie, setMovie] = useState({
-        title: "Spider-Man: No Way Home",
-        description: "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.",
-        url: "https://image.tmdb.org/t/p/original/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"
-    });
+    const [movie, setMovie] = useState();
+
+    useEffect(async () => {
+        const movieData = await generateRandomMovie();
+
+        setMovie({
+            title: movieData.title,
+            description: movieData.description,
+            url: movieData.url
+        });
+    }, []);
 
     return (
         <Wrapper>
