@@ -1,5 +1,5 @@
 export const defaultTheme = {
-    font: "Martin Sans, sans-serif",
+    font: "Roboto, sans-serif;",
 
     background: "#141414",
     foreground: "#FFFFFF",
@@ -13,5 +13,13 @@ export const defaultTheme = {
     gray700: "#E5E5E5",
     gray800: "#F0F0F0",
     error: "#D81818",
-    backdrop: "#0000004D"
+    backdrop: "#0000004D",
+
+    zIndex: {
+        billboardBackgroundImage: 990,
+        billboard: 991,
+        navigation: 992,
+        detailsBackdrop: 993,
+        detailsDialog: 994
+    }
 };
