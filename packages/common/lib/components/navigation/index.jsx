@@ -15,6 +15,7 @@ import logo from "netflix.svg";
 const Wrapper = styled.div`
     position: sticky;
     top: 0;
+    z-index: ${({theme}) => theme.zIndex.navigation};
     display: flex;
     justify-content: space-between;
     align-items: center;
