@@ -90,6 +90,16 @@ const ButtonWrapper = styled.div`
 export const Billboard = ({movie, onMoreInfo}) => {
     const [backgroundImageLoaded, setBackgroundImageLoaded] = useState(false);
 
+    const buildDesription = (d) => {
+        if (d.length < 400) {
+            return d;
+        }
+
+        const sliced = d.substring(0, 400);
+
+        return `${sliced.substring(0, d.lastIndexOf(". "))}`;
+    };
+
     return (
         <Wrapper>
             <BackgroundImage
@@ -98,55 +108,60 @@ export const Billboard = ({movie, onMoreInfo}) => {
             />
 
             <Content backgroundLoaded={backgroundImageLoaded}>
-                <Typography
-                    variant="bold"
-                    size={45}
-                    maxWidth={700}
-                >
-                    {movie?.title}
-                </Typography>
+                {
+                    movie?.title && movie?.description &&
+                    <>
+                        <Typography
+                            variant="bold"
+                            size={45}
+                            maxWidth={700}
+                        >
+                            {movie?.title}
+                        </Typography>
 
-                <Spacer size={30} />
-
-                <Typography
-                    size={18}
-                    lineHeight={28}
-                    maxWidth={600}
-                >
-                    {movie?.description}
-                </Typography>
-
-                <Spacer size={30} />
-
-                <ButtonWrapper>
-                    <PlayButton>
-                        <Icon src={playIcon} />
-
-                        <Spacer size={10} />
+                        <Spacer size={30} />
 
                         <Typography
                             size={18}
-                            variant="semiBold"
+                            lineHeight={28}
+                            maxWidth={600}
                         >
-                            Play
+                            {buildDesription(movie?.description)}
                         </Typography>
-                    </PlayButton>
 
-                    <Spacer size={20} />
+                        <Spacer size={30} />
 
-                    <MoreInfo>
-                        <Icon src={moreInfoIcon} />
+                        <ButtonWrapper>
+                            <PlayButton>
+                                <Icon src={playIcon} />
 
-                        <Spacer size={10} />
+                                <Spacer size={10} />
 
-                        <Typography
-                            size={18}
-                            variant="semiBold"
-                        >
-                            More Info
-                        </Typography>
-                    </MoreInfo>
-                </ButtonWrapper>
+                                <Typography
+                                    size={18}
+                                    variant="semiBold"
+                                >
+                                    Play
+                                </Typography>
+                            </PlayButton>
+
+                            <Spacer size={20} />
+
+                            <MoreInfo>
+                                <Icon src={moreInfoIcon} />
+
+                                <Spacer size={10} />
+
+                                <Typography
+                                    size={18}
+                                    variant="semiBold"
+                                >
+                                    More Info
+                                </Typography>
+                            </MoreInfo>
+                        </ButtonWrapper>
+                    </>
+                }
             </Content>
         </Wrapper>
     );
