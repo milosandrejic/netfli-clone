@@ -95,6 +95,7 @@ const NavItemWrapper = styled.p`
     font-family: ${({theme}) => theme.font};
     font-size: 13px;
     font-weight: ${({selected}) => selected ? 600 : 300};
+    letter-spacing: normal;
     color: ${({selected, theme}) => selected ? theme.foreground : theme.gray700};
     cursor: pointer;
     user-select: none;

@@ -11,7 +11,7 @@ import {
 const navItems = [
     {
         title: "Home",
-        route: "/"
+        route: "/browse"
     },
     {
         title: "TV Shows",

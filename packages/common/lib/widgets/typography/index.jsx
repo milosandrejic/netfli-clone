@@ -2,28 +2,27 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const Wrapper = styled.p`
     font-family: ${({theme}) => theme.font};
     font-size: ${({size}) => size}px;
     line-height: ${({size, lineHeight}) => lineHeight ? lineHeight : size * 1.25}px;
-    letter-spacing: ${({letterSpacing}) => letterSpacing ? `${letterSpacing}px` : "initial"};
+    letter-spacing: ${({letterSpacing}) => letterSpacing ? `${letterSpacing}px` : "normal"};
     font-weight: ${({weight}) => weight};
     max-width: ${({maxWidth}) => maxWidth ? `${maxWidth}px` : "none"};
     margin: 0;
     padding: 0;
-    color: ${({secondary, theme}) => secondary ? theme.gray200 : "inherit"};
+    color: inherit;
     background-color: transparent;
     overflow: inherit;
     white-space: inherit;
     text-overflow: inherit;
+    vertical-align: middle;
 `;
 
 export const Typography = ({size, variant, lineHeight, letterSpacing, secondary, maxWidth, children}) => {
     let weight = 400;
 
-    if (variant === "extraLight") {
-        weight = 200;
-    } else if (variant === "light") {
+    if (variant === "light") {
         weight = 300;
     } else if (variant === "medium") {
         weight = 500;
