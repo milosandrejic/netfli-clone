@@ -7,7 +7,8 @@ import {createGlobalStyle, ThemeProvider} from "styled-components";
 import {
     BrowserRouter as Router,
     Switch,
-    Route
+    Route,
+    Redirect
 } from "react-router-dom";
 
 import Navigation from "common/navigation";
@@ -27,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         background-color: ${({theme}) => theme.background};
+        color: ${({theme}) => theme.foreground};
     }
 `;
 
@@ -36,7 +38,10 @@ ReactDOM.render(
             <GlobalStyle />
             <Navigation />
             <Switch>
-                <Route exact path="/" component={Home} />
+                <Route exact path="/">
+                    <Redirect to="/browse" />
+                </Route>
+                <Route path="/browse" component={Home} />
             </Switch>
         </ThemeProvider>
     </Router>,
