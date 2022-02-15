@@ -25,10 +25,10 @@ const Wrapper = styled.div`
     background: linear-gradient(
         to bottom,
         rgb(20, 20, 20) 0%,
-        rgb(20, 20, 20) 10%, 
+        rgb(20, 20, 20) 5%, 
         transparent 100%
     );
-    background-size: ${({scrolled}) => scrolled ? "100% 700%" : "100% 100%"};
+    background-size: ${({scrolled}) => scrolled ? "100% 900%" : "100% 100%"};
     transition: all 400ms;
     transition-delay: 100ms;
     letter-spacing: 0.8px;

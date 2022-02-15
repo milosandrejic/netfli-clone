@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import SVG from "react-inlinesvg";
 
@@ -95,9 +95,7 @@ export const Billboard = ({movie, onMoreInfo}) => {
             return d;
         }
 
-        const sliced = d.substring(0, 400);
-
-        return `${sliced.substring(0, d.lastIndexOf(". "))}`;
+        return `${d.substring(0, 400).trim()}...`;
     };
 
     return (
