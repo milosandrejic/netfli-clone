@@ -23,7 +23,7 @@ const Content = styled.div`
     top: 0;
     left: 0;
     z-index: ${({theme}) => theme.zIndex.billboard};
-    padding-top: 200px;
+    padding-top: 150px;
     padding-left: 50px;
     width: 100%;
     height: 100%;

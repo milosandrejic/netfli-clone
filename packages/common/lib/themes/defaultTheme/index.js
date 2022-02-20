@@ -14,6 +14,7 @@ export const defaultTheme = {
     gray800: "#F0F0F0",
     error: "#D81818",
     backdrop: "#0000004D",
+    shadow: "0px 3px 27px -1px #000000",
 
     zIndex: {
         billboardBackgroundImage: 990,

@@ -40,10 +40,13 @@ const IndicatorBase = styled.div`
     top: 0;
     width: 4%;
     height: 100%;
-    background-color: rgba(20, 20, 20, .5);
     cursor: pointer;
     transition: visibility 1ms;
     transition-delay: ${({visible}) => visible ? 0 : 800}ms;
+
+    &:hover {
+        background-color: rgba(20, 20, 20, .7);
+    }
 `;
 
 const IndicatorLeft = styled(IndicatorBase)`
@@ -80,52 +83,58 @@ const SliderContent = styled.div`
 `;
 
 const SliderItemTop = styled.div`
-    background-color: red;
-    height: 100%;
-    transition: all 200ms;
+    width: 100%;
+    height: 130px;
+    background: ${({url}) => `url(${url})`};
+    background-size: 100% 100%;
+    transition: height 200ms;
     transition-delay: 200ms;
 `;
 
 const SliderItemBottom = styled.div`
-    height: 0;
+    height: 120px;
     opacity: 0;
-    width: 100%;
     background-color: green;
-    transition: all 200ms;
+    transition: opacity 200ms;
     transition-delay: 200ms;
 `;
 
 const SliderItemWrapper = styled.div`
     position: relative;
     z-index: 10;
-    border-radius: 3px;
-    overflow: hidden;
+    border-radius: 5px;
     height: 100%;
-    transition: all 200ms;
-    transition-delay: 200ms;
+    overflow: hidden;
+    transition: all 200ms 200ms;
 
     &:hover {
+        height: 300px;
         z-index: 30;
-        transform: scale(1.3, 2.3);
+        transform: scaleX(1.2) translateY(-80px);
         cursor: pointer;
 
+        ${IndicatorRight} {
+            z-index: -20;
+        }
+
         & > ${SliderItemTop} {
-            height: 60%;
+            height: 180px;
         }
 
         & > ${SliderItemBottom} {
-            height: 40%;
             opacity: 1;
         }
     }
 `;
 
-export const Slider = () => {
+export const Slider = (items) => {
     const [pageIndex, setPageIndex] = useState(0);
     const [maxPageIndex, setMaxPageIndex] = useState(3);
 
     const [sliderPosition, setSliderPosition] = useState(0);
     const [sliderTransitionStep, setSliderTransitionStep] = useState(92);
+
+    const [paginatedItems, setPaginatedItems] = useState();
 
     useEffect(() => {
         setSliderPosition(-Math.abs(pageIndex * sliderTransitionStep));
@@ -152,113 +161,111 @@ export const Slider = () => {
                     <IndicatorIcon src={indicatorLeftIcon} />
                 </IndicatorLeft>
 
-                <SliderContent
-                    sliderPosition={sliderPosition}
-                >
+                <SliderContent sliderPosition={sliderPosition}>
                     <SliderSection>
                         <SliderItemWrapper>
-                            <SliderItemTop />
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
                             <SliderItemBottom />
                         </SliderItemWrapper>
 
                         <SliderItemWrapper>
-                            <SliderItemTop />
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
                             <SliderItemBottom />
                         </SliderItemWrapper>
 
                         <SliderItemWrapper>
-                            <SliderItemTop />
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
                             <SliderItemBottom />
                         </SliderItemWrapper>
 
                         <SliderItemWrapper>
-                            <SliderItemTop />
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
                             <SliderItemBottom />
                         </SliderItemWrapper>
 
                         <SliderItemWrapper>
-                            <SliderItemTop />
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
                             <SliderItemBottom />
                         </SliderItemWrapper>
                     </SliderSection>
 
                     <SliderSection>
                         <SliderItemWrapper>
-                            <SliderItemTop />
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
                             <SliderItemBottom />
                         </SliderItemWrapper>
 
                         <SliderItemWrapper>
-                            <SliderItemTop />
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
                             <SliderItemBottom />
                         </SliderItemWrapper>
 
                         <SliderItemWrapper>
-                            <SliderItemTop />
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
                             <SliderItemBottom />
                         </SliderItemWrapper>
 
                         <SliderItemWrapper>
-                            <SliderItemTop />
+                            <SliderItemTop src="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
                             <SliderItemBottom />
                         </SliderItemWrapper>
 
                         <SliderItemWrapper>
-                            <SliderItemTop />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-                    </SliderSection>
-
-                    <SliderSection>
-                        <SliderItemWrapper>
-                            <SliderItemTop />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop />
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
                             <SliderItemBottom />
                         </SliderItemWrapper>
                     </SliderSection>
 
                     <SliderSection>
                         <SliderItemWrapper>
-                            <SliderItemTop />
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
                             <SliderItemBottom />
                         </SliderItemWrapper>
 
                         <SliderItemWrapper>
-                            <SliderItemTop />
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
                             <SliderItemBottom />
                         </SliderItemWrapper>
 
                         <SliderItemWrapper>
-                            <SliderItemTop />
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
                             <SliderItemBottom />
                         </SliderItemWrapper>
 
                         <SliderItemWrapper>
-                            <SliderItemTop />
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
                             <SliderItemBottom />
                         </SliderItemWrapper>
 
                         <SliderItemWrapper>
-                            <SliderItemTop />
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
+                            <SliderItemBottom />
+                        </SliderItemWrapper>
+                    </SliderSection>
+
+                    <SliderSection>
+                        <SliderItemWrapper>
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
+                            <SliderItemBottom />
+                        </SliderItemWrapper>
+
+                        <SliderItemWrapper>
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
+                            <SliderItemBottom />
+                        </SliderItemWrapper>
+
+                        <SliderItemWrapper>
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
+                            <SliderItemBottom />
+                        </SliderItemWrapper>
+
+                        <SliderItemWrapper>
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
+                            <SliderItemBottom />
+                        </SliderItemWrapper>
+
+                        <SliderItemWrapper>
+                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
                             <SliderItemBottom />
                         </SliderItemWrapper>
                     </SliderSection>
