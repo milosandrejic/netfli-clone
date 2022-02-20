@@ -28,8 +28,8 @@ const Wrapper = styled.div`
         rgb(20, 20, 20) 5%, 
         transparent 100%
     );
-    background-size: ${({scrolled}) => scrolled ? "100% 900%" : "100% 100%"};
-    transition: all 400ms;
+    background-size: ${({scrolled}) => scrolled ? "100% 1500%" : "100% 100%"};
+    transition: all ${({scrolled}) => scrolled ? 1000 : 450}ms ease-out;
     transition-delay: 100ms;
     letter-spacing: 0.8px;
 `;
