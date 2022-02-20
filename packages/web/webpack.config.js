@@ -102,6 +102,7 @@ module.exports = (env, argv) => {
             port: 6001,
             historyApiFallback: true,
             overlay: true,
+            open: true
         },
         resolve: {
             extensions: [".js", ".jsx"],

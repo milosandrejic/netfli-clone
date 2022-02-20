@@ -18,8 +18,9 @@ export const defaultTheme = {
     zIndex: {
         billboardBackgroundImage: 990,
         billboard: 991,
-        navigation: 992,
+        slider: 992,
         detailsBackdrop: 993,
-        detailsDialog: 994
+        detailsDialog: 994,
+        navigation: 999
     }
 };

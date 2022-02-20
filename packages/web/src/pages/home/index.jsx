@@ -2,7 +2,8 @@ import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 
 import {
-    Billboard
+    Billboard,
+    Slider
 } from "common/components";
 
 import {
@@ -13,6 +14,7 @@ import generateRandomMovie from "utils/billboardUtils";
 
 const Wrapper = styled.div`
     margin-top: -68px;
+    overflow-x: hidden;
 `;
 
 export default () => {
@@ -34,6 +36,8 @@ export default () => {
                 movie={movie}
             />
 
+
+            <Slider />
             <Spacer size={100} />
             <Spacer size={100} />
             <Spacer size={100} />
