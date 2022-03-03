@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
+import SVG from "react-inlinesvg";
 
 import {
     Typography,
@@ -8,6 +9,12 @@ import {
 
 import indicatorLeftIcon from "indicatorLeft.svg";
 import indicatorRightIcon from "indicatorRight.svg";
+
+import playIcon from "play.svg";
+import addIcon from "add.svg";
+import thumbUpIcon from "thumbUp.svg";
+import thumbDownIcon from "thumbDown.svg";
+import revealIcon from "reveal.svg";
 
 const Wrapper = styled.div`
     position: relative;
@@ -57,7 +64,7 @@ const IndicatorRight = styled(IndicatorBase)`
     right: 0;
 `;
 
-const IndicatorIcon = styled.img`
+const IndicatorIcon = styled(SVG)`
     height: 60px;
     transition: transform 100ms;
 
@@ -70,7 +77,7 @@ const SliderSection = styled.div`
     display: grid;
     width: 92vw;
     padding-left: 5px;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(5, calc(92vw / 5 - 5px));
     grid-template-rows: 130px;
     grid-column-gap: 5px;
     flex: 1;
@@ -87,30 +94,55 @@ const SliderItemTop = styled.div`
     height: 130px;
     background: ${({url}) => `url(${url})`};
     background-size: 100% 100%;
-    transition: height 200ms;
+    transition: all 200ms;
     transition-delay: 200ms;
+    border-radius: 8px;
 `;
 
 const SliderItemBottom = styled.div`
-    height: 120px;
+    padding: 24px;
     opacity: 0;
-    background-color: green;
-    transition: opacity 200ms;
+    background-color: ${({theme}) => theme.background};
+    transition: all 200ms;
     transition-delay: 200ms;
+`;
+
+const CardIconsRow = styled.div`
+    display: flex;
+`;
+
+const CardIcon = styled.img`
+    width: 30px;
+    height: 30px;
+    opacity: 0;
+    margin-right: 8px;
+    transition: all 200ms 200ms;
+    background-color: #363636;
+    border-radius: 50%;
+
+    &:first-child {
+        background-color: ${({theme}) => theme.foreground};
+    }
+
+    &:last-child {
+        margin-left: auto;
+    }
 `;
 
 const SliderItemWrapper = styled.div`
     position: relative;
     z-index: 10;
-    border-radius: 5px;
-    height: 100%;
+    height: max-content;
     overflow: hidden;
+    filter: drop-shadow(0px 8px 40px rgba(0, 0, 0, 0.5));
+    border-radius: 8px;
     transition: all 200ms 200ms;
+    width: 100%;
 
     &:hover {
-        height: 300px;
+        width: 320px;
         z-index: 30;
-        transform: scaleX(1.2) translateY(-80px);
+        transform: translate(-20px, -40%);
         cursor: pointer;
 
         ${IndicatorRight} {
@@ -119,22 +151,27 @@ const SliderItemWrapper = styled.div`
 
         & > ${SliderItemTop} {
             height: 180px;
+            border-radius: 8px 8px 0 0;
         }
 
         & > ${SliderItemBottom} {
             opacity: 1;
         }
+
+        ${CardIcon} {
+            opacity: 1;
+            width: 40px;
+            height: 40px;
+        }
     }
 `;
 
-export const Slider = (items) => {
+export const Slider = () => {
     const [pageIndex, setPageIndex] = useState(0);
     const [maxPageIndex, setMaxPageIndex] = useState(3);
 
     const [sliderPosition, setSliderPosition] = useState(0);
     const [sliderTransitionStep, setSliderTransitionStep] = useState(92);
-
-    const [paginatedItems, setPaginatedItems] = useState();
 
     useEffect(() => {
         setSliderPosition(-Math.abs(pageIndex * sliderTransitionStep));
@@ -161,115 +198,32 @@ export const Slider = (items) => {
                     <IndicatorIcon src={indicatorLeftIcon} />
                 </IndicatorLeft>
 
-                <SliderContent sliderPosition={sliderPosition}>
-                    <SliderSection>
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-                    </SliderSection>
-
-                    <SliderSection>
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop src="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-                    </SliderSection>
-
-                    <SliderSection>
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-                    </SliderSection>
-
-                    <SliderSection>
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-
-                        <SliderItemWrapper>
-                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//7vCOBYP52Mm8Nlc09hLUtWfxHjJ.jpg" />
-                            <SliderItemBottom />
-                        </SliderItemWrapper>
-                    </SliderSection>
-                </SliderContent>
+                {
+                    [1, 2, 3, 4].map(e =>
+                        <SliderContent
+                            key={e}
+                            sliderPosition={sliderPosition}
+                        >
+                            <SliderSection>
+                                {
+                                    [1, 2, 3, 4, 5].map(i =>
+                                        <SliderItemWrapper key={i}>
+                                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//eUqdBXJsYV71kt6tocosbUoICiP.jpg" />
+                                            <SliderItemBottom>
+                                                <CardIconsRow>
+                                                    <CardIcon src={playIcon} />
+                                                    <CardIcon src={addIcon} />
+                                                    <CardIcon src={thumbUpIcon} />
+                                                    <CardIcon src={thumbDownIcon} />
+                                                    <CardIcon src={revealIcon} />
+                                                </CardIconsRow>
+                                            </SliderItemBottom>
+                                        </SliderItemWrapper>)
+                                }
+                            </SliderSection>
+                        </SliderContent>
+                    )
+                }
 
                 <IndicatorRight
                     visible={pageIndex < maxPageIndex}
