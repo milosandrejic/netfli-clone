@@ -87,11 +87,6 @@ const SliderContent = styled.div`
     display: flex;
     transform: ${({sliderPosition}) => `translateX(${sliderPosition}vw)`};
     transition: transform cubic-bezier(.15,.40,.53,1) 800ms;
-
-    &:hover {
-        position: relative;
-        z-index: 10;
-    }
 `;
 
 const SliderItemTop = styled.div`
