@@ -87,6 +87,11 @@ const SliderContent = styled.div`
     display: flex;
     transform: ${({sliderPosition}) => `translateX(${sliderPosition}vw)`};
     transition: transform cubic-bezier(.15,.40,.53,1) 800ms;
+
+    &:hover {
+        position: relative;
+        z-index: 10;
+    }
 `;
 
 const SliderItemTop = styled.div`
@@ -139,15 +144,19 @@ const SliderItemWrapper = styled.div`
     transition: all 200ms 200ms;
     width: 100%;
 
+    &:first-child:hover {
+        transform: translate(0px, -40%);
+    }
+
+    &:last-child:hover {
+        transform: translate(-60px, -40%);
+    }
+
     &:hover {
         width: 320px;
         z-index: 30;
-        transform: translate(-20px, -40%);
         cursor: pointer;
-
-        ${IndicatorRight} {
-            z-index: -20;
-        }
+        transform: translate(-20px, -40%);
 
         & > ${SliderItemTop} {
             height: 180px;
