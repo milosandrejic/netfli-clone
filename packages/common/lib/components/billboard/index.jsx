@@ -51,7 +51,7 @@ const BackgroundImage = styled.img`
 const Button = styled.button`
     display: flex;
     align-items: center;
-    padding: 9px 25px 9px 20px;
+    padding: 8px 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -72,13 +72,13 @@ const PlayButton = styled(Button)`
 `;
 
 const MoreInfo = styled(Button)`
-    background-color: rgba(109, 109, 110, 0.7);
+    background-color: #FFFFFF50;
     color: ${({theme}) => theme.foreground};
 `;
 
 const Icon = styled(SVG)`
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     fill: currentColor;
 `;
 
@@ -136,14 +136,14 @@ export const Billboard = ({movie, onMoreInfo}) => {
                                 <Spacer size={10} />
 
                                 <Typography
-                                    size={18}
+                                    size={15}
                                     variant="semiBold"
                                 >
                                     Play
                                 </Typography>
                             </PlayButton>
 
-                            <Spacer size={20} />
+                            <Spacer size={15} />
 
                             <MoreInfo>
                                 <Icon src={moreInfoIcon} />
@@ -151,7 +151,7 @@ export const Billboard = ({movie, onMoreInfo}) => {
                                 <Spacer size={10} />
 
                                 <Typography
-                                    size={18}
+                                    size={14}
                                     variant="semiBold"
                                 >
                                     More Info
