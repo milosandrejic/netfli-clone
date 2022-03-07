@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, Fragment} from "react";
 import styled from "styled-components";
 import SVG from "react-inlinesvg";
 
@@ -21,8 +21,11 @@ const Wrapper = styled.div`
     z-index: ${({theme}) => theme.zIndex.slider};
     margin-top: -160px;
     color: ${({theme}) => theme.foreground};
-    overflow: clip;
-    overflow-clip-margin: 150px;
+    overflow: ${({cardHover}) => cardHover ? "visible" : "hidden"};
+
+    &:hover {
+        overflow: visible;
+    }
 `;
 
 const Heading = styled.div`
@@ -89,87 +92,6 @@ const SliderContent = styled.div`
     transition: transform cubic-bezier(.15,.40,.53,1) 800ms;
 `;
 
-const SliderItemTop = styled.div`
-    width: 100%;
-    height: 130px;
-    background: ${({url}) => `url(${url})`};
-    background-size: 100% 100%;
-    transition: all 200ms;
-    transition-delay: 200ms;
-    border-radius: 8px;
-`;
-
-const SliderItemBottom = styled.div`
-    padding: 24px;
-    opacity: 0;
-    background-color: ${({theme}) => theme.background};
-    transition: all 200ms;
-    transition-delay: 200ms;
-`;
-
-const CardIconsRow = styled.div`
-    display: flex;
-`;
-
-const CardIcon = styled.img`
-    width: 30px;
-    height: 30px;
-    opacity: 0;
-    margin-right: 8px;
-    transition: all 200ms 200ms;
-    background-color: #363636;
-    border-radius: 50%;
-
-    &:first-child {
-        background-color: ${({theme}) => theme.foreground};
-    }
-
-    &:last-child {
-        margin-left: auto;
-    }
-`;
-
-const SliderItemWrapper = styled.div`
-    position: relative;
-    z-index: 10;
-    height: max-content;
-    overflow: hidden;
-    filter: drop-shadow(0px 8px 40px rgba(0, 0, 0, 0.5));
-    border-radius: 8px;
-    transition: all 200ms 200ms;
-    width: 100%;
-
-    &:first-child:hover {
-        transform: translate(0px, -40%);
-    }
-
-    &:last-child:hover {
-        transform: translate(-60px, -40%);
-    }
-
-    &:hover {
-        width: 320px;
-        z-index: 30;
-        cursor: pointer;
-        transform: translate(-20px, -40%);
-
-        & > ${SliderItemTop} {
-            height: 180px;
-            border-radius: 8px 8px 0 0;
-        }
-
-        & > ${SliderItemBottom} {
-            opacity: 1;
-        }
-
-        ${CardIcon} {
-            opacity: 1;
-            width: 40px;
-            height: 40px;
-        }
-    }
-`;
-
 export const Slider = () => {
     const [pageIndex, setPageIndex] = useState(0);
     const [maxPageIndex, setMaxPageIndex] = useState(3);
@@ -177,12 +99,16 @@ export const Slider = () => {
     const [sliderPosition, setSliderPosition] = useState(0);
     const [sliderTransitionStep, setSliderTransitionStep] = useState(92);
 
+    const [cardHover, setCardHover] = useState(false);
+
+    const genres = ["Mystery", "Thriler", "Comedy"];
+
     useEffect(() => {
         setSliderPosition(-Math.abs(pageIndex * sliderTransitionStep));
     }, [pageIndex]);
 
     return (
-        <Wrapper>
+        <Wrapper cardHover={cardHover}>
             <Heading>
                 <Typography
                     size={20}
@@ -211,18 +137,16 @@ export const Slider = () => {
                             <SliderSection>
                                 {
                                     [1, 2, 3, 4, 5].map(i =>
-                                        <SliderItemWrapper key={i}>
-                                            <SliderItemTop url="https://image.tmdb.org/t/p/w300//eUqdBXJsYV71kt6tocosbUoICiP.jpg" />
-                                            <SliderItemBottom>
-                                                <CardIconsRow>
-                                                    <CardIcon src={playIcon} />
-                                                    <CardIcon src={addIcon} />
-                                                    <CardIcon src={thumbUpIcon} />
-                                                    <CardIcon src={thumbDownIcon} />
-                                                    <CardIcon src={revealIcon} />
-                                                </CardIconsRow>
-                                            </SliderItemBottom>
-                                        </SliderItemWrapper>)
+                                        <Card
+                                            key={i}
+                                            genres={genres}
+                                            background="https://image.tmdb.org/t/p/w300//eUqdBXJsYV71kt6tocosbUoICiP.jpg"
+                                            age={16}
+                                            seasons="5 Seasons"
+                                            match={88}
+                                            onHover={setCardHover}
+                                        />
+                                    )
                                 }
                             </SliderSection>
                         </SliderContent>
@@ -239,3 +163,161 @@ export const Slider = () => {
         </Wrapper>
     );
 };
+
+const SliderItemTop = styled.div`
+    width: 100%;
+    height: 130px;
+    background: ${({url}) => `url(${url})`};
+    background-size: 100% 100%;
+    transition: all 200ms;
+    transition-delay: 200ms;
+    border-radius: 8px;
+`;
+
+const SliderItemBottom = styled.div`
+    padding: 24px;
+    opacity: 0;
+    background-color: ${({theme}) => theme.background};
+    transition: all 200ms;
+    transition-delay: 200ms;
+`;
+
+const Row = styled.div`
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+`;
+
+const CardIcon = styled.img`
+    width: 30px;
+    height: 30px;
+    opacity: 0;
+    margin-right: 8px;
+    transition: all 200ms 200ms;
+    background-color: #363636;
+    border-radius: 50%;
+
+    &:first-child {
+        background-color: ${({theme}) => theme.foreground};
+    }
+
+    &:last-child {
+        margin-left: auto;
+    }
+`;
+
+const SliderItemWrapper = styled.div`
+    position: relative;
+    z-index: 10;
+    height: max-content;
+    overflow: hidden;
+    border-radius: 8px;
+    transition: all 200ms 200ms;
+    width: 100%;
+
+    &:first-child:hover {
+        transform: translate(0px, -40%);
+    }
+
+    &:last-child:hover {
+        transform: translate(-60px, -40%);
+    }
+
+    &:hover {
+        width: 320px;
+        z-index: 30;
+        cursor: pointer;
+        transform: translate(-20px, -40%);
+        filter: drop-shadow(0px 8px 40px rgba(0, 0, 0, 0.5));
+
+        & > ${SliderItemTop} {
+            height: 180px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        & > ${SliderItemBottom} {
+            opacity: 1;
+        }
+
+        ${CardIcon} {
+            opacity: 1;
+            width: 40px;
+            height: 40px;
+        }
+    }
+`;
+
+const Age = styled.div`
+    padding: 4px 8px;
+    border: 1px solid ${({theme}) => theme.foregorund};
+    margin: 0 10px;
+`;
+
+const GenreSeparator = styled.div`
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
+    background-color: ${({theme}) => theme.gray200};
+    margin: 0 8px;
+
+
+    &:last-child {
+        display: none;
+    }
+`;
+
+const Card = ({background, genres, match, seasons, age, onHover}) =>
+    <SliderItemWrapper
+        onMouseOverCapture={() => {
+            onHover(true);
+        }}
+        onMouseLeave={() => {
+            setTimeout(() => {
+                onHover(false);
+            }, 200);
+        }}
+    >
+        <SliderItemTop url={background} />
+
+        <SliderItemBottom>
+            <Row>
+                <CardIcon src={playIcon} />
+                <CardIcon src={addIcon} />
+                <CardIcon src={thumbUpIcon} />
+                <CardIcon src={thumbDownIcon} />
+                <CardIcon src={revealIcon} />
+            </Row>
+
+            <Spacer size={15} />
+
+            <Row>
+                <Typography
+                    variant="bold"
+                    color="#3DCD5E"
+                >
+                    {match} Match
+                </Typography>
+
+                <Age>
+                    <Typography size={14}>{age}</Typography>
+                </Age>
+
+                <Typography>{seasons}</Typography>
+            </Row>
+
+            <Spacer size={10} />
+
+            <Row>
+                {
+                    genres.map(genre =>
+                        <Fragment key={genre}>
+                            <Typography>{genre}</Typography>
+
+                            <GenreSeparator />
+                        </Fragment>
+                    )
+                }
+            </Row>
+        </SliderItemBottom>
+    </SliderItemWrapper>
+    ;
