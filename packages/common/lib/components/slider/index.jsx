@@ -21,11 +21,6 @@ const Wrapper = styled.div`
     z-index: ${({theme}) => theme.zIndex.slider};
     margin-top: -160px;
     color: ${({theme}) => theme.foreground};
-    overflow: ${({cardHover}) => cardHover ? "visible" : "hidden"};
-
-    &:hover {
-        overflow: visible;
-    }
 `;
 
 const Heading = styled.div`
@@ -99,8 +94,6 @@ export const Slider = () => {
     const [sliderPosition, setSliderPosition] = useState(0);
     const [sliderTransitionStep, setSliderTransitionStep] = useState(92);
 
-    const [cardHover, setCardHover] = useState(false);
-
     const genres = ["Mystery", "Thriler", "Comedy"];
 
     useEffect(() => {
@@ -108,7 +101,7 @@ export const Slider = () => {
     }, [pageIndex]);
 
     return (
-        <Wrapper cardHover={cardHover}>
+        <Wrapper>
             <Heading>
                 <Typography
                     size={20}
@@ -144,7 +137,6 @@ export const Slider = () => {
                                             age={16}
                                             seasons="5 Seasons"
                                             match={88}
-                                            onHover={setCardHover}
                                         />
                                     )
                                 }
@@ -163,25 +155,6 @@ export const Slider = () => {
         </Wrapper>
     );
 };
-
-const SliderItemTop = styled.div`
-    width: 100%;
-    height: 130px;
-    background: ${({url}) => `url(${url})`};
-    background-size: 100% 100%;
-    transition: all 200ms;
-    transition-delay: 200ms;
-    border-radius: 8px;
-`;
-
-const SliderItemBottom = styled.div`
-    padding: 24px;
-    opacity: 0;
-    background-color: ${({theme}) => theme.background};
-    transition: all 200ms;
-    transition-delay: 200ms;
-`;
-
 const Row = styled.div`
     display: flex;
     align-items: center;
@@ -206,6 +179,24 @@ const CardIcon = styled.img`
     }
 `;
 
+const SliderItemTop = styled.div`
+    width: 100%;
+    height: 130px;
+    background: ${({url}) => `url(${url})`};
+    background-size: 100% 100%;
+    transition: all 200ms;
+    transition-delay: 200ms;
+    border-radius: 8px;
+`;
+
+const SliderItemBottom = styled.div`
+    padding: ${({reset}) => reset ? "24px" : 0};
+    height: ${({reset}) => reset ? "auto" : 0};
+    opacity: ${({showBottom}) => showBottom ? 1 : 0};
+    background-color: ${({theme}) => theme.background};
+    transition: height 2ms, opacity 200ms 100ms;
+`;
+
 const SliderItemWrapper = styled.div`
     position: relative;
     z-index: 10;
@@ -214,6 +205,18 @@ const SliderItemWrapper = styled.div`
     border-radius: 8px;
     transition: all 200ms 200ms;
     width: 100%;
+
+
+    ${SliderItemBottom} > ${Row}:last-child > * {
+        opacity: 0;
+        font-size: 12px;
+        transition: font-size 100ms 200ms, opacity 200ms 200ms;
+    }
+
+    &:hover > ${SliderItemBottom} > ${Row}:last-child > * {
+        opacity: 1;
+        font-size: 16px;
+    }
 
     &:first-child:hover {
         transform: translate(0px, -40%);
@@ -233,10 +236,6 @@ const SliderItemWrapper = styled.div`
         & > ${SliderItemTop} {
             height: 180px;
             border-radius: 8px 8px 0 0;
-        }
-
-        & > ${SliderItemBottom} {
-            opacity: 1;
         }
 
         ${CardIcon} {
@@ -266,58 +265,69 @@ const GenreSeparator = styled.div`
     }
 `;
 
-const Card = ({background, genres, match, seasons, age, onHover}) =>
-    <SliderItemWrapper
-        onMouseOverCapture={() => {
-            onHover(true);
-        }}
-        onMouseLeave={() => {
-            setTimeout(() => {
-                onHover(false);
-            }, 200);
-        }}
-    >
-        <SliderItemTop url={background} />
+const Card = ({background, genres, match, seasons, age}) => {
+    const [showBottom, setShowBottom] = useState(false);
+    const [reset, setReset] = useState(false);
 
-        <SliderItemBottom>
-            <Row>
-                <CardIcon src={playIcon} />
-                <CardIcon src={addIcon} />
-                <CardIcon src={thumbUpIcon} />
-                <CardIcon src={thumbDownIcon} />
-                <CardIcon src={revealIcon} />
-            </Row>
+    return (
+        <SliderItemWrapper
+            onMouseOverCapture={() => {
+                setShowBottom(true);
+                setReset(true);
+            }}
+            onMouseLeave={() => {
+                setShowBottom(false);
 
-            <Spacer size={15} />
+                setTimeout(() => {
+                    setReset(false);
+                }, 200);
+            }}
+        >
+            <SliderItemTop url={background} />
 
-            <Row>
-                <Typography
-                    variant="bold"
-                    color="#3DCD5E"
-                >
-                    {match} Match
-                </Typography>
+            <SliderItemBottom
+                showBottom={showBottom}
+                reset={reset}
+            >
+                <Row>
+                    <CardIcon src={playIcon} />
+                    <CardIcon src={addIcon} />
+                    <CardIcon src={thumbUpIcon} />
+                    <CardIcon src={thumbDownIcon} />
+                    <CardIcon src={revealIcon} />
+                </Row>
 
-                <Age>
-                    <Typography size={14}>{age}</Typography>
-                </Age>
+                <Spacer size={15} />
 
-                <Typography>{seasons}</Typography>
-            </Row>
+                <Row>
+                    <Typography
+                        variant="bold"
+                        color="#3DCD5E"
+                    >
+                        {match} Match
+                    </Typography>
 
-            <Spacer size={10} />
+                    <Age>
+                        <Typography size={14}>{age}</Typography>
+                    </Age>
 
-            <Row>
-                {
-                    genres.map(genre =>
-                        <Fragment key={genre}>
-                            <Typography>{genre}</Typography>
+                    <Typography>{seasons}</Typography>
+                </Row>
 
-                            <GenreSeparator />
-                        </Fragment>
-                    )
-                }
-            </Row>
-        </SliderItemBottom>
-    </SliderItemWrapper>
-    ;
+                <Spacer size={10} />
+
+                <Row>
+                    {
+                        genres.map(genre =>
+                            <Fragment key={genre}>
+                                <Typography>{genre}</Typography>
+
+                                <GenreSeparator />
+                            </Fragment>
+                        )
+                    }
+                </Row>
+            </SliderItemBottom>
+        </SliderItemWrapper>
+    );
+};
