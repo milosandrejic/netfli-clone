@@ -6,12 +6,12 @@ const Wrapper = styled.p`
     font-family: ${({theme}) => theme.font};
     font-size: ${({size}) => size}px;
     line-height: ${({size, lineHeight}) => lineHeight ? lineHeight : size * 1.25}px;
-    letter-spacing: ${({letterSpacing}) => letterSpacing ? `${letterSpacing}px` : "normal"};
+    letter-spacing: ${({letterSpacing}) => letterSpacing ? `${letterSpacing}px` : ".75px"};
     font-weight: ${({weight}) => weight};
     max-width: ${({maxWidth}) => maxWidth ? `${maxWidth}px` : "none"};
     margin: 0;
     padding: 0;
-    color: inherit;
+    color: ${({color}) => color ? color : "inherit"};
     background-color: transparent;
     overflow: inherit;
     white-space: inherit;
@@ -19,7 +19,7 @@ const Wrapper = styled.p`
     vertical-align: middle;
 `;
 
-export const Typography = ({size, variant, lineHeight, letterSpacing, secondary, maxWidth, children}) => {
+export const Typography = ({size, color, variant, lineHeight, letterSpacing, secondary, maxWidth, children}) => {
     let weight = 400;
 
     if (variant === "light") {
@@ -33,6 +33,7 @@ export const Typography = ({size, variant, lineHeight, letterSpacing, secondary,
     return (
         <Wrapper
             size={size}
+            color={color}
             lineHeight={lineHeight}
             weight={weight}
             secondary={secondary}
@@ -48,6 +49,9 @@ Typography.propTypes = {
 
     /** Font size in pixels */
     size: PropTypes.number.isRequired,
+
+    /** Font color */
+    color: PropTypes.string,
 
     /** Line height in pixels. If not set, line height is 125% of text size */
     lineHeight: PropTypes.number,
