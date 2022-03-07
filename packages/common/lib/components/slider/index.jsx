@@ -304,7 +304,7 @@ const Card = ({background, genres, match, seasons, age}) => {
                         variant="bold"
                         color="#3DCD5E"
                     >
-                        {match} Match
+                        {match}&#37; Match
                     </Typography>
 
                     <Age>

@@ -36,7 +36,6 @@ export default () => {
                 movie={movie}
             />
 
-
             <Slider />
             <Spacer size={100} />
             <Spacer size={100} />
