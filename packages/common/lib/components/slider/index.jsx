@@ -230,7 +230,7 @@ const SliderItemWrapper = styled.div`
         width: 320px;
         z-index: 30;
         cursor: pointer;
-        transform: translate(-20px, -40%);
+        transform: translate(-20px, -30%);
         filter: drop-shadow(0px 8px 40px rgba(0, 0, 0, 0.5));
 
         & > ${SliderItemTop} {
