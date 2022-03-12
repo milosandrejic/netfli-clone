@@ -15,6 +15,7 @@ import addIcon from "add.svg";
 import thumbUpIcon from "thumbUp.svg";
 import thumbDownIcon from "thumbDown.svg";
 import revealIcon from "reveal.svg";
+import exploreAllIcon from "arrowRight.svg";
 
 const Wrapper = styled.div`
     position: relative;
@@ -23,9 +24,41 @@ const Wrapper = styled.div`
     color: ${({theme}) => theme.foreground};
 `;
 
+const ExploreAllText = styled.div`
+    opacity: 0;
+    user-select: none;
+    padding-left: 10px;
+    visibility: hidden;
+    transition: all 300ms;
+    transform: translateX(-50px);
+`;
+
+const ExploreAllIcon = styled(SVG)`
+    opacity: 0;
+    width: 24px;
+    height: 24px;
+    visibility: hidden;
+    transition: all 250ms 50ms ease-out;
+    transform: translateX(-100px);
+`;
+
 const Heading = styled.div`
     display: flex;
+    align-items: center;
     padding-left: 4vw;
+    cursor: pointer;
+
+    &:hover > ${ExploreAllText} {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+
+    &:hover > ${ExploreAllIcon} {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
 `;
 
 const SliderWrapper = styled.div`
@@ -109,6 +142,17 @@ export const Slider = () => {
                 >
                     Trending Now
                 </Typography>
+
+                <ExploreAllText>
+                    <Typography
+                        size={14}
+                        variant="bold"
+                    >
+                        Explore all
+                    </Typography>
+                </ExploreAllText>
+
+                <ExploreAllIcon src={exploreAllIcon} />
             </Heading>
 
             <Spacer size={20} />
