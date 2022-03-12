@@ -1,6 +1,7 @@
 import React, {useState, useEffect, Fragment} from "react";
 import styled from "styled-components";
 import SVG from "react-inlinesvg";
+import _ from "lodash";
 
 import {
     Typography,
@@ -44,8 +45,9 @@ const ExploreAllIcon = styled(SVG)`
 
 const Heading = styled.div`
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding-left: 4vw;
+    padding: 0 4vw;
     cursor: pointer;
 
     &:hover > ${ExploreAllText} {
@@ -59,6 +61,18 @@ const Heading = styled.div`
         visibility: visible;
         transform: translateX(0);
     }
+`;
+
+const HeadingLeft = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const HeadingRight = styled.div`
+    display: flex;
+    align-items: flex-end;
+    align-self: flex-end;
+    padding-bottom: 5px;
 `;
 
 const SliderWrapper = styled.div`
@@ -136,26 +150,35 @@ export const Slider = () => {
     return (
         <Wrapper>
             <Heading>
-                <Typography
-                    size={20}
-                    variant="bold"
-                >
-                    Trending Now
-                </Typography>
-
-                <ExploreAllText>
+                <HeadingLeft>
                     <Typography
-                        size={14}
+                        size={20}
                         variant="bold"
                     >
-                        Explore all
+                        Trending Now
                     </Typography>
-                </ExploreAllText>
 
-                <ExploreAllIcon src={exploreAllIcon} />
+                    <ExploreAllText>
+                        <Typography
+                            size={14}
+                            variant="bold"
+                        >
+                            Explore all
+                        </Typography>
+                    </ExploreAllText>
+
+                    <ExploreAllIcon src={exploreAllIcon} />
+                </HeadingLeft>
+
+                <HeadingRight>
+                    <Pagination
+                        pageCount={maxPageIndex + 1}
+                        activePageIndex={pageIndex}
+                    />
+                </HeadingRight>
             </Heading>
 
-            <Spacer size={20} />
+            <Spacer size={10} />
 
             <SliderWrapper>
                 <IndicatorLeft
@@ -375,3 +398,26 @@ const Card = ({background, genres, match, seasons, age}) => {
         </SliderItemWrapper>
     );
 };
+
+const PaginationWraper = styled.div`
+    display: inline-flex;
+`;
+
+const PaginationItem = styled.div`
+    width: 12px;
+    height: 2px;
+    margin-right: 3px;
+    background-color: ${({currentPage, theme}) => currentPage ? theme.gray700 : theme.gray200};
+`;
+
+const Pagination = ({pageCount, activePageIndex}) =>
+    <PaginationWraper>
+        {
+            _.times(pageCount).map((p, index) =>
+                <PaginationItem
+                    key={index}
+                    currentPage={activePageIndex === index}
+                />
+            )
+        }
+    </PaginationWraper>;
