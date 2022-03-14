@@ -49,6 +49,11 @@ const Heading = styled.div`
     align-items: center;
     padding: 0 4vw;
     cursor: pointer;
+`;
+
+const HeadingLeft = styled.div`
+    display: flex;
+    align-items: center;
 
     &:hover > ${ExploreAllText} {
         opacity: 1;
@@ -61,11 +66,6 @@ const Heading = styled.div`
         visibility: visible;
         transform: translateX(0);
     }
-`;
-
-const HeadingLeft = styled.div`
-    display: flex;
-    align-items: center;
 `;
 
 const HeadingRight = styled.div`
@@ -141,6 +141,8 @@ export const Slider = () => {
     const [sliderPosition, setSliderPosition] = useState(0);
     const [sliderTransitionStep, setSliderTransitionStep] = useState(92);
 
+    const [showPagination, setShowPagination] = useState(false);
+
     const genres = ["Mystery", "Thriler", "Comedy"];
 
     useEffect(() => {
@@ -148,7 +150,10 @@ export const Slider = () => {
     }, [pageIndex]);
 
     return (
-        <Wrapper>
+        <Wrapper
+            onMouseOverCapture={() => setShowPagination(true)}
+            onMouseLeave={() => setShowPagination(false)}
+        >
             <Heading>
                 <HeadingLeft>
                     <Typography
@@ -172,6 +177,7 @@ export const Slider = () => {
 
                 <HeadingRight>
                     <Pagination
+                        show={showPagination}
                         pageCount={maxPageIndex + 1}
                         activePageIndex={pageIndex}
                     />
@@ -400,7 +406,7 @@ const Card = ({background, genres, match, seasons, age}) => {
 };
 
 const PaginationWraper = styled.div`
-    display: inline-flex;
+    display: ${({show}) => show ? "inline-flex" : "none"};
 `;
 
 const PaginationItem = styled.div`
@@ -410,8 +416,8 @@ const PaginationItem = styled.div`
     background-color: ${({currentPage, theme}) => currentPage ? theme.gray700 : theme.gray200};
 `;
 
-const Pagination = ({pageCount, activePageIndex}) =>
-    <PaginationWraper>
+const Pagination = ({show, pageCount, activePageIndex}) =>
+    <PaginationWraper show={show}>
         {
             _.times(pageCount).map((p, index) =>
                 <PaginationItem
