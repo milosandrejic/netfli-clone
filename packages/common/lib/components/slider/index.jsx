@@ -21,7 +21,7 @@ import exploreAllIcon from "arrowRight.svg";
 const Wrapper = styled.div`
     position: relative;
     z-index: ${({theme}) => theme.zIndex.slider};
-    margin-top: -160px;
+    margin-top: -10%;
     color: ${({theme}) => theme.foreground};
 `;
 
@@ -228,6 +228,7 @@ export const Slider = () => {
         </Wrapper>
     );
 };
+
 const Row = styled.div`
     display: flex;
     align-items: center;
@@ -279,7 +280,6 @@ const SliderItemWrapper = styled.div`
     transition: all 200ms 200ms;
     width: 100%;
 
-
     ${SliderItemBottom} > ${Row}:last-child > * {
         opacity: 0;
         font-size: 12px;
@@ -296,11 +296,11 @@ const SliderItemWrapper = styled.div`
     }
 
     &:last-child:hover {
-        transform: translate(-60px, -40%);
+        transform: translate(calc(-4vw + 5px), -40%);
     }
 
     &:hover {
-        width: 320px;
+        width: calc(100% * 1.2);
         z-index: 30;
         cursor: pointer;
         transform: translate(-20px, -30%);
@@ -331,7 +331,6 @@ const GenreSeparator = styled.div`
     border-radius: 100%;
     background-color: ${({theme}) => theme.gray200};
     margin: 0 8px;
-
 
     &:last-child {
         display: none;
