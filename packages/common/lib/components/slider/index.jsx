@@ -21,8 +21,11 @@ import exploreAllIcon from "arrowRight.svg";
 const Wrapper = styled.div`
     position: relative;
     z-index: ${({theme}) => theme.zIndex.slider};
-    margin-top: -10%;
     color: ${({theme}) => theme.foreground};
+
+    &:hover {
+        z-index: 999;
+    }
 `;
 
 const ExploreAllText = styled.div`
@@ -131,22 +134,33 @@ const SliderSection = styled.div`
 const SliderContent = styled.div`
     display: flex;
     transform: ${({sliderPosition}) => `translateX(${sliderPosition}vw)`};
-    transition: transform cubic-bezier(.15,.40,.53,1) 800ms;
+    transition: transform cubic-bezier(.15,.40,.53,1) 650ms;
 `;
 
-export const Slider = () => {
+export const Slider = ({movies, title, onExploreAll}) => {
     const [pageIndex, setPageIndex] = useState(0);
     const [maxPageIndex, setMaxPageIndex] = useState(3);
 
     const [sliderPosition, setSliderPosition] = useState(0);
-    const [sliderTransitionStep, setSliderTransitionStep] = useState(92);
-
     const [showPagination, setShowPagination] = useState(false);
+    const [sliderTransitionProgress, setSliderTransitionProgress] = useState(false);
+
+    const [paginatedItems, setPaignatedItems] = useState([]);
 
     const genres = ["Mystery", "Thriler", "Comedy"];
 
     useEffect(() => {
-        setSliderPosition(-Math.abs(pageIndex * sliderTransitionStep));
+        const wholePageCount = Math.floor(movies.length / 5);
+
+        const wholePageItems = movies.slice(0, wholePageCount * 5);
+
+        setMaxPageIndex(wholePageCount - 1);
+        setPaignatedItems(_.chunk(wholePageItems, 5));
+    }, [movies]);
+
+    useEffect(() => {
+        // 92 is slider transition distance per page
+        setSliderPosition(-Math.abs(pageIndex * 92));
     }, [pageIndex]);
 
     return (
@@ -160,10 +174,10 @@ export const Slider = () => {
                         size={20}
                         variant="bold"
                     >
-                        Trending Now
+                        {title}
                     </Typography>
 
-                    <ExploreAllText>
+                    <ExploreAllText onClick={() => onExploreAll()}>
                         <Typography
                             size={14}
                             variant="bold"
@@ -189,24 +203,30 @@ export const Slider = () => {
             <SliderWrapper>
                 <IndicatorLeft
                     visible={pageIndex > 0}
-                    onClick={() => setPageIndex(pageIndex - 1)}
+                    onClick={() => {
+                        if (!sliderTransitionProgress) {
+                            setPageIndex(pageIndex - 1);
+                            setSliderTransitionProgress(true);
+                        }
+                    }}
                 >
                     <IndicatorIcon src={indicatorLeftIcon} />
                 </IndicatorLeft>
 
                 {
-                    [1, 2, 3, 4].map(e =>
+                    paginatedItems.map(movie =>
                         <SliderContent
-                            key={e}
+                            key={movie.id}
                             sliderPosition={sliderPosition}
+                            onTransitionEnd={() => setSliderTransitionProgress(false)}
                         >
                             <SliderSection>
                                 {
-                                    [1, 2, 3, 4, 5].map(i =>
+                                    movie.map(m =>
                                         <Card
-                                            key={i}
+                                            key={_.uniqueId()}
                                             genres={genres}
-                                            background="https://image.tmdb.org/t/p/w300//eUqdBXJsYV71kt6tocosbUoICiP.jpg"
+                                            background={`https://image.tmdb.org/t/p/w300/${m.backdrop_path}`}
                                             age={16}
                                             seasons="5 Seasons"
                                             match={88}
@@ -220,7 +240,12 @@ export const Slider = () => {
 
                 <IndicatorRight
                     visible={pageIndex < maxPageIndex}
-                    onClick={() => setPageIndex(pageIndex + 1)}
+                    onClick={() => {
+                        if (!sliderTransitionProgress) {
+                            setPageIndex(pageIndex + 1);
+                            setSliderTransitionProgress(true);
+                        }
+                    }}
                 >
                     <IndicatorIcon src={indicatorRightIcon} />
                 </IndicatorRight>
@@ -261,6 +286,7 @@ const SliderItemTop = styled.div`
     transition: all 200ms;
     transition-delay: 200ms;
     border-radius: 8px;
+    background-color: #999999;
 `;
 
 const SliderItemBottom = styled.div`
@@ -279,6 +305,7 @@ const SliderItemWrapper = styled.div`
     border-radius: 8px;
     transition: all 200ms 200ms;
     width: 100%;
+    background-color: transparent;
 
     ${SliderItemBottom} > ${Row}:last-child > * {
         opacity: 0;
