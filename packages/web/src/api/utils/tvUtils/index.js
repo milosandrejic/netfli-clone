@@ -8,5 +8,6 @@ export const getTvShowList = async (type, page = 1) => {
 
 export const tvListType = {
     POPULAR: "popular",
-    TOP_RATED: "top_rated"
+    TOP_RATED: "top_rated",
+    ON_THE_AIR: "on_the_air"
 };

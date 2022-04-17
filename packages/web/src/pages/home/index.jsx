@@ -75,22 +75,21 @@ export default () => {
                 <Spacer size={50} />
 
                 <MovieRow
-                    fetchMovies={() => getTvShowList(movieListType.POPULAR)}
-                    title="Popular"
+                    fetchMovies={() => getTvShowList(tvListType.ON_THE_AIR, 2)}
+                    title="On the Air"
+                />
+                <Spacer size={50} />
+
+                <MovieRow
+                    fetchMovies={() => getTvShowList(tvListType.POPULAR)}
+                    title="Popular Shows"
                 />
 
                 <Spacer size={50} />
 
                 <MovieRow
                     fetchMovies={() => getTvShowList(tvListType.TOP_RATED)}
-                    title="Top Rated"
-                />
-
-                <Spacer size={50} />
-
-                <MovieRow
-                    fetchMovies={() => getTvShowList(tvListType.POPULAR)}
-                    title="Popular"
+                    title="Top Rated Shows"
                 />
 
                 <Spacer size={50} />
