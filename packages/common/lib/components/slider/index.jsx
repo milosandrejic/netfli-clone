@@ -204,7 +204,7 @@ export const Slider = ({movies, title, onExploreAll}) => {
                 <IndicatorLeft
                     visible={pageIndex > 0}
                     onClick={() => {
-                        if (!sliderTransitionProgress) {
+                        if (!sliderTransitionProgress && pageIndex > 0) {
                             setPageIndex(pageIndex - 1);
                             setSliderTransitionProgress(true);
                         }
@@ -214,9 +214,9 @@ export const Slider = ({movies, title, onExploreAll}) => {
                 </IndicatorLeft>
 
                 {
-                    paginatedItems.map(movie =>
+                    paginatedItems.map((movie, index) =>
                         <SliderContent
-                            key={movie.id}
+                            key={index}
                             sliderPosition={sliderPosition}
                             onTransitionEnd={() => setSliderTransitionProgress(false)}
                         >
@@ -241,7 +241,7 @@ export const Slider = ({movies, title, onExploreAll}) => {
                 <IndicatorRight
                     visible={pageIndex < maxPageIndex}
                     onClick={() => {
-                        if (!sliderTransitionProgress) {
+                        if (!sliderTransitionProgress && pageIndex + 1 <= maxPageIndex) {
                             setPageIndex(pageIndex + 1);
                             setSliderTransitionProgress(true);
                         }

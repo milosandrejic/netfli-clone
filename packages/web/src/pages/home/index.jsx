@@ -10,13 +10,12 @@ import {
     Spacer
 } from "common/widgets";
 
-import generateRandomMovie from "utils/billboardUtils";
-
 import {
     getMovieList,
     movieListType,
     getTvShowList,
-    tvListType
+    tvListType,
+    generateRandomMovie
 } from "api/utils";
 
 const Wrapper = styled.div`

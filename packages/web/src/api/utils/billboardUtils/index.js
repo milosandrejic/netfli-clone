@@ -1,7 +1,7 @@
-import buildImageUrl from "utils/imageUtils";
+import {buildImageUrl} from "api/utils";
 import api from "api";
 
-export default async () => {
+export const generateRandomMovie = async () => {
     const movieIndex = Math.round(Math.random() * (18 - 1 + 1) + 1);
     const page = Math.round(Math.random() * (100 - 1 + 1) + 1);
 

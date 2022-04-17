@@ -47,9 +47,3 @@ ReactDOM.render(
     </Router>,
     document.getElementById("root")
 );
-
-if ("service-worker" in navigator) {
-    window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/service-worker.js");
-    });
-}
