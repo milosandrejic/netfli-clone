@@ -319,11 +319,11 @@ const SliderItemWrapper = styled.div`
     }
 
     &:first-child:hover {
-        transform: translate(0px, -40%);
+        transform: translate(0px, -30%);
     }
 
     &:last-child:hover {
-        transform: translate(calc(-4vw + 5px), -40%);
+        transform: translate(calc(-4vw + 5px), -30%);
     }
 
     &:hover {
