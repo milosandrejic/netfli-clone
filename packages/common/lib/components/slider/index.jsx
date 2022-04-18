@@ -24,7 +24,7 @@ const Wrapper = styled.div`
     color: ${({theme}) => theme.foreground};
 
     &:hover {
-        z-index: 999;
+        z-index: ${({theme}) => theme.zIndex.sliderHovered};
     }
 `;
 
@@ -137,7 +137,7 @@ const SliderContent = styled.div`
     transition: transform cubic-bezier(.15,.40,.53,1) 650ms;
 `;
 
-export const Slider = ({movies, title, onExploreAll}) => {
+export const Slider = ({movies, title, genres, onExploreAll}) => {
     const [pageIndex, setPageIndex] = useState(0);
     const [maxPageIndex, setMaxPageIndex] = useState(3);
 
@@ -146,8 +146,6 @@ export const Slider = ({movies, title, onExploreAll}) => {
     const [sliderTransitionProgress, setSliderTransitionProgress] = useState(false);
 
     const [paginatedItems, setPaignatedItems] = useState([]);
-
-    const genres = ["Mystery", "Thriler", "Comedy"];
 
     useEffect(() => {
         const wholePageCount = Math.floor(movies.length / 5);
@@ -225,11 +223,12 @@ export const Slider = ({movies, title, onExploreAll}) => {
                                     movie.map(m =>
                                         <Card
                                             key={_.uniqueId()}
-                                            genres={genres}
+                                            genres={_.intersectionWith(genres, m.genre_ids, (l, r) => l.id === r)}
                                             background={`https://image.tmdb.org/t/p/w300/${m.backdrop_path}`}
                                             age={16}
                                             seasons="5 Seasons"
                                             match={88}
+                                            title={m.title}
                                         />
                                     )
                                 }
@@ -290,7 +289,7 @@ const SliderItemTop = styled.div`
 `;
 
 const SliderItemBottom = styled.div`
-    padding: ${({reset}) => reset ? "24px" : 0};
+    padding: ${({reset}) => reset ? "18px" : 0};
     height: ${({reset}) => reset ? "auto" : 0};
     opacity: ${({showBottom}) => showBottom ? 1 : 0};
     background-color: ${({theme}) => theme.background};
@@ -357,14 +356,14 @@ const GenreSeparator = styled.div`
     height: 4px;
     border-radius: 100%;
     background-color: ${({theme}) => theme.gray200};
-    margin: 0 8px;
+    margin: 0 5px;
 
     &:last-child {
         display: none;
     }
 `;
 
-const Card = ({background, genres, match, seasons, age}) => {
+const Card = ({background, genres, match, seasons, age, title}) => {
     const [showBottom, setShowBottom] = useState(false);
     const [reset, setReset] = useState(false);
 
@@ -388,6 +387,10 @@ const Card = ({background, genres, match, seasons, age}) => {
                 showBottom={showBottom}
                 reset={reset}
             >
+                <Typography size={18}>{title}</Typography>
+
+                <Spacer size={15} />
+
                 <Row>
                     <CardIcon src={playIcon} />
                     <CardIcon src={addIcon} />
@@ -418,8 +421,8 @@ const Card = ({background, genres, match, seasons, age}) => {
                 <Row>
                     {
                         genres.map(genre =>
-                            <Fragment key={genre}>
-                                <Typography>{genre}</Typography>
+                            <Fragment key={genre.id}>
+                                <Typography size={14}>{genre?.name}</Typography>
 
                                 <GenreSeparator />
                             </Fragment>

@@ -20,6 +20,7 @@ export const defaultTheme = {
         billboardBackgroundImage: 990,
         billboard: 991,
         slider: 992,
+        sliderHovered: 993,
         detailsBackdrop: 993,
         detailsDialog: 994,
         navigation: 999

@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 
+import api from "api";
+
 import {
     Billboard,
     Slider
@@ -29,14 +31,18 @@ const MovieRowWrapper = styled.div`
 
 export default () => {
     const [movie, setMovie] = useState();
+    const [genres, setGenres] = useState([]);
 
     useEffect(async () => {
-        const movieData = await generateRandomMovie();
+        const movieResponse = await generateRandomMovie();
+        const genresResponse = await api.get("/genre/movie/list");
+
+        setGenres(genresResponse.data.genres);
 
         setMovie({
-            title: movieData.title,
-            description: movieData.description,
-            url: movieData.url
+            title: movieResponse.title,
+            description: movieResponse.description,
+            url: movieResponse.url
         });
     }, []);
 
@@ -47,6 +53,7 @@ export default () => {
             <MovieRowWrapper>
                 <MovieRow
                     fetchMovies={() => getMovieList(movieListType.POPULAR)}
+                    genres={genres}
                     title="Popular"
                 />
 
@@ -54,6 +61,7 @@ export default () => {
 
                 <MovieRow
                     fetchMovies={() => getMovieList(movieListType.NOW_PLAYING)}
+                    genres={genres}
                     title="Now Playing"
                 />
 
@@ -61,6 +69,7 @@ export default () => {
 
                 <MovieRow
                     fetchMovies={() => getMovieList(movieListType.UPCOMING)}
+                    genres={genres}
                     title="Upcoming"
                 />
 
@@ -68,6 +77,7 @@ export default () => {
 
                 <MovieRow
                     fetchMovies={() => getMovieList(movieListType.TOP_RATED)}
+                    genres={genres}
                     title="Top Rated"
                 />
 
@@ -75,12 +85,14 @@ export default () => {
 
                 <MovieRow
                     fetchMovies={() => getTvShowList(tvListType.ON_THE_AIR, 2)}
+                    genres={genres}
                     title="On the Air"
                 />
                 <Spacer size={50} />
 
                 <MovieRow
                     fetchMovies={() => getTvShowList(tvListType.POPULAR)}
+                    genres={genres}
                     title="Popular Shows"
                 />
 
@@ -88,17 +100,17 @@ export default () => {
 
                 <MovieRow
                     fetchMovies={() => getTvShowList(tvListType.TOP_RATED)}
+                    genres={genres}
                     title="Top Rated Shows"
                 />
 
                 <Spacer size={50} />
             </MovieRowWrapper>
-
         </Wrapper>
     );
 };
 
-const MovieRow = ({title, onExploreAll, fetchMovies}) => {
+const MovieRow = ({title, genres,  onExploreAll, fetchMovies}) => {
     const [movies, setMovies] = useState([]);
 
     useEffect(async () => {
@@ -111,6 +123,7 @@ const MovieRow = ({title, onExploreAll, fetchMovies}) => {
         <Slider
             movies={movies}
             title={title}
+            genres={genres}
             onExploreAll={onExploreAll}
         />
     );
