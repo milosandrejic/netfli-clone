@@ -35,9 +35,13 @@ export default () => {
 
     useEffect(async () => {
         const movieResponse = await generateRandomMovie();
-        const genresResponse = await api.get("/genre/movie/list");
 
-        setGenres(genresResponse.data.genres);
+        const [movieGenreResponse, tvShowGenreREsponse] = await Promise.all([
+            api.get("/genre/movie/list"),
+            api.get("/genre/tv/list")
+        ]);
+
+        setGenres([...movieGenreResponse.data.genres, ...tvShowGenreREsponse.data.genres]);
 
         setMovie({
             title: movieResponse.title,
@@ -104,14 +108,16 @@ export default () => {
                     title="Top Rated Shows"
                 />
 
-                <Spacer size={50} />
+                <Spacer size={150} />
             </MovieRowWrapper>
         </Wrapper>
     );
 };
 
-const MovieRow = ({title, genres,  onExploreAll, fetchMovies}) => {
+const MovieRow = ({title, genres, onExploreAll, fetchMovies}) => {
     const [movies, setMovies] = useState([]);
+
+    console.log(genres);
 
     useEffect(async () => {
         const movieResponse = await fetchMovies();
