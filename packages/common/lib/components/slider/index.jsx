@@ -228,7 +228,7 @@ export const Slider = ({movies, title, genres, onExploreAll}) => {
                                             age={16}
                                             seasons="5 Seasons"
                                             match={88}
-                                            title={m.title}
+                                            title={m.title ?? m.name}
                                         />
                                     )
                                 }
