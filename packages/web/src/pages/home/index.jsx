@@ -56,7 +56,7 @@ export default () => {
 
             <MovieRowWrapper>
                 <MovieRow
-                    fetchMovies={() => getMovieList(movieListType.POPULAR)}
+                    fetchMovies={() => getMovieList(movieListType.POPULAR, 1)}
                     genres={genres}
                     title="Popular"
                 />
@@ -64,7 +64,7 @@ export default () => {
                 <Spacer size={50} />
 
                 <MovieRow
-                    fetchMovies={() => getMovieList(movieListType.NOW_PLAYING)}
+                    fetchMovies={() => getMovieList(movieListType.NOW_PLAYING, 2)}
                     genres={genres}
                     title="Now Playing"
                 />
@@ -116,8 +116,6 @@ export default () => {
 
 const MovieRow = ({title, genres, onExploreAll, fetchMovies}) => {
     const [movies, setMovies] = useState([]);
-
-    console.log(genres);
 
     useEffect(async () => {
         const movieResponse = await fetchMovies();
