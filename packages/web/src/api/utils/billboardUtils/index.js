@@ -12,6 +12,6 @@ export const generateRandomMovie = async () => {
     return {
         title: movieData.title,
         description: movieData.overview,
-        url: buildImageUrl("original", movieData.backdrop_path)
+        url: buildImageUrl("w1280", movieData.backdrop_path)
     };
 };
