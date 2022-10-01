@@ -1,7 +1,7 @@
 import "@babel/polyfill";
 
 import React from "react";
-import ReactDOM from "react-dom";
+import {createRoot} from "react-dom/client";
 import {createGlobalStyle, ThemeProvider} from "styled-components";
 
 import {
@@ -32,7 +32,10 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
-ReactDOM.render(
+const container = document.getElementById("root");
+const root = createRoot(container);
+
+root.render(
     <Router>
         <ThemeProvider theme={defaultTheme}>
             <GlobalStyle />
@@ -44,6 +47,5 @@ ReactDOM.render(
                 <Route path="/browse" component={Home} />
             </Switch>
         </ThemeProvider>
-    </Router>,
-    document.getElementById("root")
+    </Router>
 );

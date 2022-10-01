@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-
 import api from "api";
 
 import {
@@ -54,67 +53,70 @@ export default () => {
         <Wrapper>
             <Billboard movie={movie}/>
 
-            <MovieRowWrapper>
-                <MovieRow
-                    fetchMovies={() => getMovieList(movieListType.POPULAR, 1)}
-                    genres={genres}
-                    title="Popular"
-                />
+            {
+                genres.length > 0 &&
+                <MovieRowWrapper>
+                    <MovieRow
+                        fetchMovies={() => getMovieList(movieListType.POPULAR, 1)}
+                        genres={genres}
+                        title="Popular"
+                    />
 
-                <Spacer size={50} />
+                    <Spacer size={50} />
 
-                <MovieRow
-                    fetchMovies={() => getMovieList(movieListType.NOW_PLAYING, 2)}
-                    genres={genres}
-                    title="Now Playing"
-                />
+                    <MovieRow
+                        fetchMovies={() => getMovieList(movieListType.NOW_PLAYING, 2)}
+                        genres={genres}
+                        title="Now Playing"
+                    />
 
-                <Spacer size={50} />
+                    <Spacer size={50} />
 
-                <MovieRow
-                    fetchMovies={() => getMovieList(movieListType.UPCOMING)}
-                    genres={genres}
-                    title="Upcoming"
-                />
+                    <MovieRow
+                        fetchMovies={() => getMovieList(movieListType.UPCOMING)}
+                        genres={genres}
+                        title="Upcoming"
+                    />
 
-                <Spacer size={50} />
+                    <Spacer size={50} />
 
-                <MovieRow
-                    fetchMovies={() => getMovieList(movieListType.TOP_RATED)}
-                    genres={genres}
-                    title="Top Rated"
-                />
+                    <MovieRow
+                        fetchMovies={() => getMovieList(movieListType.TOP_RATED)}
+                        genres={genres}
+                        title="Top Rated"
+                    />
 
-                <Spacer size={50} />
+                    <Spacer size={50} />
 
-                <MovieRow
-                    fetchMovies={() => getTvShowList(tvListType.ON_THE_AIR, 2)}
-                    genres={genres}
-                    title="On the Air"
-                />
-                <Spacer size={50} />
+                    <MovieRow
+                        fetchMovies={() => getTvShowList(tvListType.ON_THE_AIR, 2)}
+                        genres={genres}
+                        title="On the Air"
+                    />
+                    <Spacer size={50} />
 
-                <MovieRow
-                    fetchMovies={() => getTvShowList(tvListType.POPULAR)}
-                    genres={genres}
-                    title="Popular Shows"
-                />
+                    <MovieRow
+                        fetchMovies={() => getTvShowList(tvListType.POPULAR)}
+                        genres={genres}
+                        title="Popular Shows"
+                    />
 
-                <Spacer size={50} />
+                    <Spacer size={50} />
 
-                <MovieRow
-                    fetchMovies={() => getTvShowList(tvListType.TOP_RATED)}
-                    genres={genres}
-                    title="Top Rated Shows"
-                />
+                    <MovieRow
+                        fetchMovies={() => getTvShowList(tvListType.TOP_RATED)}
+                        genres={genres}
+                        title="Top Rated Shows"
+                    />
 
-                <Spacer size={150} />
-            </MovieRowWrapper>
+                    <Spacer size={150} />
+                </MovieRowWrapper>
+            }
         </Wrapper>
     );
 };
 
-const MovieRow = ({title, genres, onExploreAll, fetchMovies}) => {
+const MovieRow = React.memo(({title, genres, onExploreAll, fetchMovies}) => {
     const [movies, setMovies] = useState([]);
 
     useEffect(async () => {
@@ -131,4 +133,4 @@ const MovieRow = ({title, genres, onExploreAll, fetchMovies}) => {
             onExploreAll={onExploreAll}
         />
     );
-};
+});

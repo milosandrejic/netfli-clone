@@ -222,7 +222,7 @@ export const Slider = ({movies, title, genres, onExploreAll}) => {
                                 {
                                     movie.map(m =>
                                         <Card
-                                            key={_.uniqueId()}
+                                            key={m.id}
                                             genres={_.intersectionWith(genres, m.genre_ids, (l, r) => l.id === r)}
                                             background={`https://image.tmdb.org/t/p/w300/${m.backdrop_path}`}
                                             age={16}
